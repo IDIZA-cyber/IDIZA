@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Buy Data | IDIZA</title>
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Bootstrap Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+    <!-- Google Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- IDIZA CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <style>
+        body {
+            background: #f6f8fb;
+        }
+
+        .buy-page {
+            padding: 55px 0 80px;
+        }
+
+        .page-header {
+            margin-bottom: 35px;
+        }
+
+        .page-header h1 {
+            font-size: 32px;
+            font-weight: 800;
+            color: #081b33;
+            margin-bottom: 8px;
+        }
+
+        .page-header p {
+            color: #667085;
+            margin: 0;
+        }
+
+        .purchase-card,
+        .summary-card {
+            background: #ffffff;
+            border: 1px solid #e4e8ef;
+            border-radius: 18px;
+            box-shadow: 0 8px 30px rgba(8, 27, 51, 0.05);
+        }
+
+        .purchase-card {
+            padding: 30px;
+        }
+
+        .summary-card {
+            padding: 28px;
+            position: sticky;
+            top: 90px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #081b33;
+            margin-bottom: 18px;
+        }
+
+        /* Network Selection */
+
+        .network-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .network-option {
+            border: 2px solid #e4e8ef;
+            background: #fff;
+            border-radius: 14px;
+            padding: 18px 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .network-option:hover {
+            transform: translateY(-2px);
+            border-color: #b9c8dc;
+        }
+
+        .network-option.active {
+            border-color: #1677ff;
+            background: #f0f6ff;
+        }
+
+        .network-logo {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            margin: 0 auto 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 13px;
+        }
+
+        .network-logo.mtn {
+            background: #ffcc00;
+            color: #111;
+        }
+
+        .network-logo.airtel {
+            background: #e31837;
+            color: #fff;
+        }
+
+        .network-logo.glo {
+            background: #008a3d;
+            color: #fff;
+        }
+
+        .network-logo.nine-mobile {
+            background: #008f8f;
+            color: #fff;
+        }
+
+        .network-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: #172033;
+        }
+
+        /* Plans */
+
+        .plan-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .plan-option {
+            border: 2px solid #e4e8ef;
+            border-radius: 14px;
+            padding: 18px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: #fff;
+        }
+
+        .plan-option:hover {
+            border-color: #b9c8dc;
+        }
+
+        .plan-option.active {
+            border-color: #1677ff;
+            background: #f0f6ff;
+        }
+
+        .plan-size {
+            font-size: 21px;
+            font-weight: 800;
+            color: #081b33;
+        }
+
+        .plan-validity {
+            color: #667085;
+            font-size: 12px;
+            margin-top: 3px;
+        }
+
+        .plan-price {
+            color: #1677ff;
+            font-size: 16px;
+            font-weight: 700;
+            margin-top: 10px;
+        }
+
+        /* Form */
+
+        .form-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #172033;
+        }
+
+        .form-control {
+            min-height: 52px;
+            border: 1px solid #d9dee7;
+            border-radius: 11px;
+            padding: 12px 15px;
+        }
+
+        .form-control:focus {
+            border-color: #1677ff;
+            box-shadow: 0 0 0 4px rgba(22, 119, 255, 0.10);
+        }
+
+        .phone-help {
+            font-size: 12px;
+            color: #667085;
+            margin-top: 7px;
+        }
+
+        /* Summary */
+
+        .summary-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: #081b33;
+            margin-bottom: 22px;
+        }
+
+        .summary-network {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px;
+            background: #f6f8fb;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .summary-network-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .summary-network-info strong {
+            display: block;
+            color: #172033;
+            font-size: 14px;
+        }
+
+        .summary-network-info span {
+            color: #667085;
+            font-size: 12px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 13px 0;
+            border-bottom: 1px solid #edf0f4;
+            font-size: 14px;
+        }
+
+        .summary-row span:first-child {
+            color: #667085;
+        }
+
+        .summary-row span:last-child {
+            color: #172033;
+            font-weight: 600;
+            text-align: right;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .total-row span:first-child {
+            color: #172033;
+            font-weight: 700;
+        }
+
+        .total-price {
+            font-size: 25px;
+            font-weight: 800;
+            color: #1677ff;
+        }
+
+        .pay-btn {
+            width: 100%;
+            min-height: 54px;
+            border: none;
+            border-radius: 12px;
+            background: #1677ff;
+            color: white;
+            font-weight: 700;
+            transition: all 0.2s ease;
+        }
+
+        .pay-btn:hover {
+            background: #0d63d7;
+            transform: translateY(-1px);
+        }
+
+        .payment-note {
+            display: flex;
+            gap: 9px;
+            margin-top: 15px;
+            padding: 13px;
+            border-radius: 10px;
+            background: #f6f8fb;
+            color: #667085;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .payment-note i {
+            color: #1677ff;
+            font-size: 16px;
+        }
+
+        .demo-alert {
+            display: none;
+            margin-top: 15px;
+            padding: 13px 15px;
+            border-radius: 10px;
+            background: #fff8e6;
+            border: 1px solid #f2d58b;
+            color: #795b08;
+            font-size: 13px;
+        }
+
+        @media (max-width: 991px) {
+            .summary-card {
+                position: static;
+                margin-top: 25px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .network-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .plan-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .purchase-card,
+            .summary-card {
+                padding: 22px;
+            }
+
+            .page-header h1 {
+                font-size: 27px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg bg-white border-bottom sticky-top">
+    <div class="container">
+
+        <a class="navbar-brand fw-bold" href="index.html">
+            <span style="color:#081b33;">IDI</span><span style="color:#1677ff;">ZA</span>
+        </a>
+
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#mainNavbar"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainNavbar">
+
+            <ul class="navbar-nav me-auto ms-lg-4">
+                <li class="nav-item">
+                    <a class="nav-link" href="dashboard.html">Dashboard</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="buy-data.html">Buy Data</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="data-plans.html">Data Plans</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="transactions.html">Transactions</a>
+                </li>
+            </ul>
+
+            <div class="dropdown">
+                <button
+                    class="btn btn-light rounded-pill px-3 dropdown-toggle"
+                    data-bs-toggle="dropdown"
+                >
+                    <span
+                        class="d-inline-flex align-items-center justify-content-center rounded-circle me-2"
+                        style="width:32px;height:32px;background:#eaf2ff;color:#1677ff;font-weight:700;"
+                    >
+                        IA
+                    </span>
+                    Idris
+                </button>
+
+                <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0">
+                    <li>
+                        <a class="dropdown-item" href="profile.html">
+                            <i class="bi bi-person me-2"></i>
+                            My Profile
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item" href="notifications.html">
+                            <i class="bi bi-bell me-2"></i>
+                            Notifications
+                        </a>
+                    </li>
+
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item text-danger" href="login.html">
+                            <i class="bi bi-box-arrow-right me-2"></i>
+                            Logout
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</nav>
+
+
+<!-- Main -->
+<main class="buy-page">
+
+    <div class="container">
+
+        <!-- Header -->
+        <div class="page-header">
+            <h1>Buy Data</h1>
+            <p>Choose your network, select a data plan, and enter the phone number.</p>
+        </div>
+
+
+        <div class="row g-4">
+
+            <!-- LEFT SIDE -->
+            <div class="col-lg-8">
+
+                <div class="purchase-card">
+
+                    <!-- Network -->
+                    <h2 class="section-title">
+                        1. Choose Network
+                    </h2>
+
+                    <div class="network-grid">
+
+                        <div class="network-option" data-network="MTN">
+                            <div class="network-logo mtn">
+                                MTN
+                            </div>
+                            <div class="network-name">
+                                MTN
+                            </div>
+                        </div>
+
+                        <div class="network-option" data-network="Airtel">
+                            <div class="network-logo airtel">
+                                AIRTEL
+                            </div>
+                            <div class="network-name">
+                                Airtel
+                            </div>
+                        </div>
+
+                        <div class="network-option" data-network="Glo">
+                            <div class="network-logo glo">
+                                GLO
+                            </div>
+                            <div class="network-name">
+                                Glo
+                            </div>
+                        </div>
+
+                        <div class="network-option" data-network="9mobile">
+                            <div class="network-logo nine-mobile">
+                                9MOBILE
+                            </div>
+                            <div class="network-name">
+                                9mobile
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <!-- Plans -->
+                    <h2 class="section-title">
+                        2. Choose Data Plan
+                    </h2>
+
+                    <div class="plan-grid">
+
+                        <div
+                            class="plan-option"
+                            data-plan="1GB"
+                            data-price="500"
+                        >
+                            <div class="plan-size">1GB</div>
+                            <div class="plan-validity">30 Days</div>
+                            <div class="plan-price">₦500</div>
+                        </div>
+
+                        <div
+                            class="plan-option"
+                            data-plan="2GB"
+                            data-price="900"
+                        >
+                            <div class="plan-size">2GB</div>
+                            <div class="plan-validity">30 Days</div>
+                            <div class="plan-price">₦900</div>
+                        </div>
+
+                        <div
+                            class="plan-option"
+                            data-plan="5GB"
+                            data-price="2000"
+                        >
+                            <div class="plan-size">5GB</div>
+                            <div class="plan-validity">30 Days</div>
+                            <div class="plan-price">₦2,000</div>
+                        </div>
+
+                    </div>
+
+
+                    <!-- Phone Number -->
+                    <h2 class="section-title">
+                        3. Enter Phone Number
+                    </h2>
+
+                    <div class="mb-3">
+
+                        <label for="phoneNumber" class="form-label">
+                            Beneficiary Phone Number
+                        </label>
+
+                        <input
+                            type="tel"
+                            class="form-control"
+                            id="phoneNumber"
+                            placeholder="08012345678"
+                            maxlength="11"
+                        >
+
+                        <div class="phone-help">
+                            Enter the Nigerian phone number that should receive the data.
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- RIGHT SIDE -->
+            <div class="col-lg-4">
+
+                <div class="summary-card">
+
+                    <div class="summary-title">
+                        Order Summary
+                    </div>
+
+                    <!-- Network Summary -->
+                    <div class="summary-network">
+
+                        <div
+                            class="summary-network-icon network-logo mtn"
+                            id="summaryNetworkIcon"
+                        >
+                            MTN
+                        </div>
+
+                        <div class="summary-network-info">
+                            <strong id="summaryNetwork">
+                                Select network
+                            </strong>
+
+                            <span>
+                                Mobile Data
+                            </span>
+                        </div>
+
+                    </div>
+
+
+                    <!-- Details -->
+                    <div class="summary-row">
+                        <span>Data Plan</span>
+                        <span id="summaryPlan">Not selected</span>
+                    </div>
+
+                    <div class="summary-row">
+                        <span>Phone Number</span>
+                        <span id="summaryPhone">Not entered</span>
+                    </div>
+
+                    <div class="summary-row">
+                        <span>Validity</span>
+                        <span id="summaryValidity">30 Days</span>
+                    </div>
+
+
+                    <!-- Total -->
+                    <div class="total-row">
+                        <span>Total</span>
+
+                        <span
+                            class="total-price"
+                            id="summaryPrice"
+                        >
+                            ₦0
+                        </span>
+                    </div>
+
+
+                    <!-- Pay -->
+                    <button
+                        type="button"
+                        class="pay-btn"
+                        id="payButton"
+                    >
+                        <i class="bi bi-lock-fill me-2"></i>
+                        Pay Now
+                    </button>
+
+
+                    <div class="payment-note">
+                        <i class="bi bi-shield-check"></i>
+
+                        <span>
+                            Your payment will be processed securely.
+                            Paystack payment integration will be connected
+                            when the IDIZA backend is completed.
+                        </span>
+                    </div>
+
+
+                    <div id="demoAlert" class="demo-alert">
+                        <i class="bi bi-info-circle me-1"></i>
+                        This is currently a frontend demo.
+                        No real payment has been processed.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<!-- Footer -->
+<footer class="border-top bg-white py-4">
+    <div class="container">
+
+        <div class="row align-items-center">
+
+            <div class="col-md-6">
+                <div class="fw-bold fs-5">
+                    <span style="color:#081b33;">IDI</span><span style="color:#1677ff;">ZA</span>
+                </div>
+
+                <small class="text-muted">
+                    Simple, fast and reliable mobile data.
+                </small>
+            </div>
+
+            <div class="col-md-6 text-md-end mt-3 mt-md-0">
+                <small class="text-muted">
+                    © 2026 IDIZA. All rights reserved.
+                </small>
+            </div>
+
+        </div>
+
+    </div>
+</footer>
+
+
+<!-- Bootstrap JS -->
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+></script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const networkOptions = document.querySelectorAll(".network-option");
+    const planOptions = document.querySelectorAll(".plan-option");
+
+    const phoneInput = document.getElementById("phoneNumber");
+
+    const summaryNetwork = document.getElementById("summaryNetwork");
+    const summaryNetworkIcon = document.getElementById("summaryNetworkIcon");
+    const summaryPlan = document.getElementById("summaryPlan");
+    const summaryPhone = document.getElementById("summaryPhone");
+    const summaryPrice = document.getElementById("summaryPrice");
+
+    const payButton = document.getElementById("payButton");
+    const demoAlert = document.getElementById("demoAlert");
+
+
+    let selectedNetwork = "";
+    let selectedPlan = "";
+    let selectedPrice = 0;
+
+
+    /*
+     * NETWORK SELECTION
+     */
+    networkOptions.forEach(option => {
+
+        option.addEventListener("click", function () {
+
+            networkOptions.forEach(item => {
+                item.classList.remove("active");
+            });
+
+            this.classList.add("active");
+
+            selectedNetwork = this.dataset.network;
+
+            summaryNetwork.textContent = selectedNetwork;
+
+            summaryNetworkIcon.textContent =
+                selectedNetwork === "9mobile"
+                    ? "9MOBILE"
+                    : selectedNetwork.toUpperCase();
+
+            updateSummary();
+        });
+
+    });
+
+
+    /*
+     * PLAN SELECTION
+     */
+    planOptions.forEach(option => {
+
+        option.addEventListener("click", function () {
+
+            planOptions.forEach(item => {
+                item.classList.remove("active");
+            });
+
+            this.classList.add("active");
+
+            selectedPlan = this.dataset.plan;
+            selectedPrice = Number(this.dataset.price);
+
+            summaryPlan.textContent = selectedPlan;
+
+            summaryPrice.textContent =
+                "₦" + selectedPrice.toLocaleString();
+
+            updateSummary();
+        });
+
+    });
+
+
+    /*
+     * PHONE NUMBER
+     */
+    phoneInput.addEventListener("input", function () {
+
+        let value = this.value.replace(/\D/g, "");
+
+        if (value.length > 11) {
+            value = value.substring(0, 11);
+        }
+
+        this.value = value;
+
+        if (value.length === 0) {
+            summaryPhone.textContent = "Not entered";
+        } else {
+            summaryPhone.textContent = value;
+        }
+
+    });
+
+
+    /*
+     * UPDATE SUMMARY
+     */
+    function updateSummary() {
+
+        if (!selectedNetwork) {
+            summaryNetwork.textContent = "Select network";
+        }
+
+        if (!selectedPlan) {
+            summaryPlan.textContent = "Not selected";
+        }
+
+        if (!selectedPrice) {
+            summaryPrice.textContent = "₦0";
+        }
+
+    }
+
+
+    /*
+     * PAY BUTTON
+     */
+    payButton.addEventListener("click", function () {
+
+        demoAlert.style.display = "none";
+
+        if (!selectedNetwork) {
+            alert("Please select a network.");
+            return;
+        }
+
+        if (!selectedPlan) {
+            alert("Please select a data plan.");
+            return;
+        }
+
+        const phone = phoneInput.value.trim();
+
+        if (!/^0\d{10}$/.test(phone)) {
+            alert("Please enter a valid 11-digit Nigerian phone number.");
+            phoneInput.focus();
+            return;
+        }
+
+        demoAlert.style.display = "block";
+
+        demoAlert.innerHTML = `
+            <i class="bi bi-info-circle me-1"></i>
+            Order ready for ${selectedNetwork} ${selectedPlan}
+            to ${phone}. Paystack payment will be connected
+            when the backend is completed.
+        `;
+
+    });
+
+
+    /*
+     * READ URL PARAMETERS
+     *
+     * Example:
+     * buy-data.html?network=MTN&plan=1GB
+     */
+    const params = new URLSearchParams(window.location.search);
+
+    const networkFromUrl = params.get("network");
+    const planFromUrl = params.get("plan");
+
+
+    /*
+     * PRESELECT NETWORK
+     */
+    if (networkFromUrl) {
+
+        networkOptions.forEach(option => {
+
+            if (
+                option.dataset.network.toLowerCase() ===
+                networkFromUrl.toLowerCase()
+            ) {
+                option.click();
+            }
+
+        });
+
+    }
+
+
+    /*
+     * PRESELECT PLAN
+     */
+    if (planFromUrl) {
+
+        planOptions.forEach(option => {
+
+            if (
+                option.dataset.plan.toLowerCase() ===
+                planFromUrl.toLowerCase()
+            ) {
+                option.click();
+            }
+
+        });
+
+    }
+
+});
+</script>
+
+</body>
+</html>

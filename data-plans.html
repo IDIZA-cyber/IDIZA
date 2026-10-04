@@ -1,0 +1,1596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Data Plans | IDIZA</title>
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Bootstrap Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+    <!-- Google Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- IDIZA CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <style>
+        /* =========================================
+           IDIZA DATA PLANS PAGE
+        ========================================= */
+
+        .plans-page {
+            background: #f6f8fb;
+            min-height: 100vh;
+        }
+
+        .plans-hero {
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(8, 27, 51, 0.98),
+                    rgba(16, 44, 77, 0.96)
+                );
+            color: #fff;
+            padding: 80px 0 100px;
+        }
+
+        .plans-hero h1 {
+            font-size: clamp(2rem, 5vw, 3.4rem);
+            font-weight: 800;
+            margin-bottom: 18px;
+        }
+
+        .plans-hero p {
+            max-width: 650px;
+            margin: 0 auto;
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .plans-wrapper {
+            margin-top: -45px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .plans-filter-box {
+            background: #fff;
+            border: 1px solid #e4e8ef;
+            border-radius: 18px;
+            padding: 22px;
+            box-shadow: 0 15px 45px rgba(8, 27, 51, 0.08);
+        }
+
+        .filter-title {
+            font-weight: 700;
+            color: #172033;
+        }
+
+        .network-filter {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .network-filter button {
+            border: 1px solid #e4e8ef;
+            background: #fff;
+            color: #172033;
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .network-filter button:hover,
+        .network-filter button.active {
+            background: #1677ff;
+            border-color: #1677ff;
+            color: #fff;
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #667085;
+        }
+
+        .search-box input {
+            padding-left: 44px;
+            height: 48px;
+            border-radius: 10px;
+            border: 1px solid #e4e8ef;
+        }
+
+        .search-box input:focus {
+            border-color: #1677ff;
+            box-shadow: 0 0 0 3px rgba(22, 119, 255, 0.1);
+        }
+
+        .plans-section {
+            padding: 60px 0 90px;
+        }
+
+        .section-heading {
+            margin-bottom: 35px;
+        }
+
+        .section-heading h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #081b33;
+        }
+
+        .section-heading p {
+            color: #667085;
+            margin-bottom: 0;
+        }
+
+        .plan-card {
+            background: #fff;
+            border: 1px solid #e4e8ef;
+            border-radius: 18px;
+            padding: 24px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.25s ease;
+        }
+
+        .plan-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(22, 119, 255, 0.3);
+            box-shadow: 0 18px 40px rgba(8, 27, 51, 0.08);
+        }
+
+        .plan-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 22px;
+        }
+
+        .network-badge {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .mtn-badge {
+            background: #ffcc00;
+            color: #111;
+        }
+
+        .airtel-badge {
+            background: #e31b23;
+        }
+
+        .glo-badge {
+            background: #1a9d49;
+        }
+
+        .nine-badge {
+            background: #172b4d;
+        }
+
+        .plan-network {
+            font-size: 0.85rem;
+            color: #667085;
+            font-weight: 600;
+        }
+
+        .plan-data {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #081b33;
+            margin-bottom: 5px;
+        }
+
+        .plan-validity {
+            color: #667085;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .plan-price {
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: #1677ff;
+            margin-bottom: 20px;
+        }
+
+        .plan-features {
+            border-top: 1px solid #edf0f4;
+            padding-top: 18px;
+            margin-top: auto;
+            margin-bottom: 20px;
+        }
+
+        .plan-features div {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #667085;
+            font-size: 0.88rem;
+            margin-bottom: 8px;
+        }
+
+        .plan-features i {
+            color: #16a36a;
+        }
+
+        .btn-buy-plan {
+            width: 100%;
+            background: #1677ff;
+            border: 1px solid #1677ff;
+            color: #fff;
+            padding: 12px 18px;
+            border-radius: 10px;
+            font-weight: 700;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+
+        .btn-buy-plan:hover {
+            background: #0d63d7;
+            border-color: #0d63d7;
+            color: #fff;
+        }
+
+        .empty-plans {
+            display: none;
+            text-align: center;
+            padding: 60px 20px;
+            color: #667085;
+        }
+
+        .empty-plans i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 767px) {
+
+            .plans-hero {
+                padding: 60px 0 85px;
+            }
+
+            .plans-wrapper {
+                margin-top: -35px;
+            }
+
+            .plans-filter-box {
+                padding: 18px;
+            }
+
+            .network-filter {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .network-filter button {
+                width: 100%;
+            }
+
+            .plans-section {
+                padding-top: 45px;
+            }
+        }
+    </style>
+</head>
+
+<body class="plans-page">
+
+    <!-- =========================================
+         NAVBAR
+    ========================================== -->
+    <nav class="navbar navbar-expand-lg navbar-dark idiza-navbar sticky-top">
+        <div class="container">
+
+            <a class="navbar-brand fw-bold" href="index.html">
+                <span class="brand-logo">IDIZA</span>
+            </a>
+
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#mainNavbar"
+                aria-controls="mainNavbar"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="mainNavbar">
+
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">
+                            Home
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" href="data-plans.html">
+                            Data Plans
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">
+                            About
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">
+                            Contact
+                        </a>
+                    </li>
+
+                </ul>
+
+                <div class="d-flex gap-2">
+
+                    <a
+                        href="login.html"
+                        class="btn btn-outline-light btn-sm px-3"
+                    >
+                        Login
+                    </a>
+
+                    <a
+                        href="register.html"
+                        class="btn btn-primary btn-sm px-3"
+                    >
+                        Create Account
+                    </a>
+
+                </div>
+
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- =========================================
+         HERO
+    ========================================== -->
+    <section class="plans-hero text-center">
+
+        <div class="container">
+
+            <span class="badge bg-primary px-3 py-2 mb-3">
+                Affordable Data Plans
+            </span>
+
+            <h1>
+                Choose the Right Data Plan
+            </h1>
+
+            <p>
+                Browse affordable mobile data plans from your favorite
+                network. Select a plan, enter your phone number, and
+                get connected quickly.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         FILTER AREA
+    ========================================== -->
+    <div class="container plans-wrapper">
+
+        <div class="plans-filter-box">
+
+            <div class="row align-items-center g-4">
+
+                <div class="col-lg-7">
+
+                    <div class="filter-title mb-3">
+                        Select Network
+                    </div>
+
+                    <div class="network-filter">
+
+                        <button
+                            type="button"
+                            class="network-btn active"
+                            data-network="all"
+                        >
+                            All Networks
+                        </button>
+
+                        <button
+                            type="button"
+                            class="network-btn"
+                            data-network="mtn"
+                        >
+                            MTN
+                        </button>
+
+                        <button
+                            type="button"
+                            class="network-btn"
+                            data-network="airtel"
+                        >
+                            Airtel
+                        </button>
+
+                        <button
+                            type="button"
+                            class="network-btn"
+                            data-network="glo"
+                        >
+                            Glo
+                        </button>
+
+                        <button
+                            type="button"
+                            class="network-btn"
+                            data-network="9mobile"
+                        >
+                            9mobile
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-lg-5">
+
+                    <div class="filter-title mb-3">
+                        Search Data Plan
+                    </div>
+
+                    <div class="search-box">
+
+                        <i class="bi bi-search"></i>
+
+                        <input
+                            type="text"
+                            id="planSearch"
+                            class="form-control"
+                            placeholder="Search e.g. 1GB, 10GB..."
+                        >
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
+         DATA PLANS
+    ========================================== -->
+    <section class="plans-section">
+
+        <div class="container">
+
+            <div class="section-heading text-center">
+
+                <h2>
+                    Available Data Plans
+                </h2>
+
+                <p>
+                    Choose a plan that works for you.
+                </p>
+
+            </div>
+
+
+            <div
+                class="row g-4"
+                id="plansContainer"
+            >
+
+                <!-- ==============================
+                     MTN PLANS
+                =============================== -->
+
+                <div
+                    class="col-md-6 col-lg-4 plan-item"
+                    data-network="mtn"
+                    data-search="mtn 1gb 30 days"
+                >
+
+                    <div class="plan-card">
+
+                        <div class="plan-top">
+
+                            <div class="network-badge mtn-badge">
+                                MTN
+                            </div>
+
+                            <span class="plan-network">
+                                MTN Nigeria
+                            </span>
+
+                        </div>
+
+                        <div class="plan-data">
+                            1GB
+                        </div>
+
+                        <div class="plan-validity">
+                            Valid for 30 days
+                        </div>
+
+                        <div class="plan-price">
+                            ₦500
+                        </div>
+
+                        <div class="plan-features">
+
+                            <div>
+                                <i class="bi bi-check-circle-fill"></i>
+                                Instant delivery
+                            </div>
+
+                            <div>
+                                <i class="bi bi-check-circle-fill"></i>
+                                Secure payment
+                            </div>
+
+                            <div>
+                                <i class="bi bi-check-circle-fill"></i>
+                                MTN network
+                            </div>
+
+                        </div>
+
+                        <a
+                            href="buy-data.html?network=mtn&plan=1gb"
+                            class="btn-buy-plan"
+                        >
+                            Buy Now
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="col-md-6 col-lg-4 plan-item"
+                    data-network="mtn"
+                    data-search="mtn 2gb 30 days"
+                >
+
+                    <div class="plan-card">
+
+                        <div class="plan-top">
+
+                            <div class="network-badge mtn-badge">
+                                MTN
+                            </div>
+
+                            <span class="plan-network">
+                                MTN Nigeria
+                            </span>
+
+                        </div>
+
+                        <div class="plan-data">
+                            2GB
+                        </div>
+
+                        <div class="plan-validity">
+                            Valid for 30 days
+                        </div>
+
+                        <div class="plan-price">
+                            ₦900
+                        </div>
+
+                        <div class="plan-features">
+
+                            <div>
+                                <i class="bi bi-check-circle-fill"></i>
+                                Instant delivery
+                            </div>
+
+                            <div>
+                                <i class="bi bi-check-circle-fill"></i>
+                                Secure payment
+                            </div>
+
+                            <div>
+                                <i class="bi bi-check-circle-fill"></i>
+                                MTN network
+                            </div>
+
+                        </div>
+
+                        <a
+                            href="buy-data.html?network=mtn&plan=2gb"
+                            class="btn-buy-plan"
+                        >
+                            Buy Now
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="col-md-6 col-lg-4 plan-item"
+                    data-network="mtn"
+                    data-search="mtn 5gb 30 days"
+                >
+
+                    <div class="plan-card">
+
+                        <div class="plan-top">
+
+                            <div class="network-badge mtn-badge">
+                                MTN
+                            </div>
+
+                            <span class="plan-network">
+                                MTN Nigeria
+                            </span>
+
+                        </div>
+
+                        <div class="plan-data">
+                            5GB
+                        </div>
+
+                        <div class="plan-validity">
+                            Valid for 30 days
+                        </div>
+
+                        <div class="plan-price">
+                            ₦2,000
+                        </div>
+
+                        <div class="plan-features">
+
+                            <div>
+                                <i class="bi bi-check-circle-fill"></i>
+                                Instant delivery
+                            </div>
+
+                            <div>
+                                <i class="bi bi-check-circle-fill"></i>
+                                Secure payment
+                            </div>
+
+                            <div>
+                                <i class="bi bi-check-circle-fill"></i>
+                                MTN network
+                            </div>
+
+                        </div>
+
+                        <a
+                            href="buy-data.html?network=mtn&plan=5gb"
+                            class="btn-buy-plan"
+                        >
+                            Buy Now
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ==============================
+                     AIRTEL PLANS
+                =============================== -->
+
+                <div
+                    class="col-md-6 col-lg-4 plan-item"
+                    data-network="airtel"
+                    data-search="airtel 1gb 30 days"
+                >
+
+                    <div class="plan-card">
+
+                        <div class="plan-top">
+
+                            <div class="network-badge airtel-badge">
+                                Airtel
+                            </div>
+
+                            <span class="plan-network">
+                                Airtel Nigeria
+                            </span>
+
+                        </div>
+
+                        <div class="plan-data">
+                            1GB
+                        </div>
+
+                        <div class="plan-validity">
+                            Valid for 30 days
+                        </div>
+
+                        <div class="plan-price">
+                            ₦500
+                        </div>
+
+                        <div class="plan-features">
+
+                            <div>
+                                <i class="bi bi-check-circle-fill"></i>
+                                Instant delivery
+                            </div>
+
+                            <div>
+                                <i class="bi bi-check-circle-fill"></i>
+                                Secure payment
+                            </div>
+
+                            <div>
+                                <i class="bi bi-check-circle-fill"></i>
+                                Airtel network
+                            </div>
+
+                        </div>
+
+                        <a
+                            href="buy-data.html?network=airtel&plan=1gb"
+                            class="btn-buy-plan"
+                        >
+                            Buy Now
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="col-md-6 col-lg-4 plan-item"
+                    data-network="airtel"
+                    data-search="airtel 2gb 30 days"
+                >
+
+                    <div class="plan-card">
+
+                        <div class="plan-top">
+
+                            <div class="network-badge airtel-badge">
+                                Airtel
+                            </div>
+
+                            <span class="plan-network">
+                                Airtel Nigeria
+                            </span>
+
+                        </div>
+
+                        <div class="plan-data">
+                            2GB
+                        </div>
+
+                        <div class="plan-validity">
+                            Valid for 30 days
+                        </div>
+
+                        <div class="plan-price">
+                            ₦900
+                        </div>
+
+                        <div class="plan-features">
+
+                            <div>
+                                <i class="bi bi-check-circle-fill"></i>
+                                Instant delivery
+                            </div>
+
+                            <div>
+                                <i class="bi bi-check-circle-fill"></i>
+                                Secure payment
+                            </div>
+
+                            <div>
+                                <i class="bi bi-check-circle-fill"></i>
+                                Airtel network
+                            </div>
+
+                        </div>
+
+                        <a
+                            href="buy-data.html?network=airtel&plan=2gb"
+                            class="btn-buy-plan"
+                        >
+                            Buy Now
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="col-md-6 col-lg-4 plan-item"
+                    data-network="airtel"
+                    data-search="airtel 5gb 30 days"
+                >
+
+                    <div class="plan-card">
+
+                        <div class="plan-top">
+
+                            <div class="network-badge airtel-badge">
+                                Airtel
+                            </div>
+
+                            <span class="plan-network">
+                                Airtel Nigeria
+                            </span>
+
+                        </div>
+
+                        <div class="plan-data">
+                            5GB
+                        </div>
+
+                        <div class="plan-validity">
+                            Valid for 30 days
+                        </div>
+
+                        <div class="plan-price">
+                            ₦2,000
+                        </div>
+
+                        <div class="plan-features">
+
+                            <div>
+                                <i class="bi bi-check-circle-fill"></i>
+                                Instant delivery
+                            </div>
+
+                            <div>
+                                <i class="bi bi-check-circle-fill"></i>
+                                Secure payment
+                            </div>
+
+                            <div>
+                                <i class="bi bi-check-circle-fill"></i>
+                                Airtel network
+                            </div>
+
+                        </div>
+
+                        <a
+                            href="buy-data.html?network=airtel&plan=5gb"
+                            class="btn-buy-plan"
+                        >
+                            Buy Now
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ==============================
+                     GLO PLANS
+                =============================== -->
+
+                <div
+                    class="col-md-6 col-lg-4 plan-item"
+                    data-network="glo"
+                    data-search="glo 1gb 30 days"
+                >
+
+                    <div class="plan-card">
+
+                        <div class="plan-top">
+
+                            <div class="network-badge glo-badge">
+                                Glo
+                            </div>
+
+                            <span class="plan-network">
+                                Glo Nigeria
+                            </span>
+
+                        </div>
+
+                        <div class="plan-data">
+                            1GB
+                        </div>
+
+                        <div class="plan-validity">
+                            Valid for 30 days
+                        </div>
+
+                        <div class="plan-price">
+                            ₦500
+                        </div>
+
+                        <div class="plan-features">
+
+                            <div>
+                                <i class="bi bi-check-circle-fill"></i>
+                                Instant delivery
+                            </div>
+
+                            <div>
+                                <i class="bi bi-check-circle-fill"></i>
+                                Secure payment
+                            </div>
+
+                            <div>
+                                <i class="bi bi-check-circle-fill"></i>
+                                Glo network
+                            </div>
+
+                        </div>
+
+                        <a
+                            href="buy-data.html?network=glo&plan=1gb"
+                            class="btn-buy-plan"
+                        >
+                            Buy Now
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="col-md-6 col-lg-4 plan-item"
+                    data-network="glo"
+                    data-search="glo 2gb 30 days"
+                >
+
+                    <div class="plan-card">
+
+                        <div class="plan-top">
+
+                            <div class="network-badge glo-badge">
+                                Glo
+                            </div>
+
+                            <span class="plan-network">
+                                Glo Nigeria
+                            </span>
+
+                        </div>
+
+                        <div class="plan-data">
+                            2GB
+                        </div>
+
+                        <div class="plan-validity">
+                            Valid for 30 days
+                        </div>
+
+                        <div class="plan-price">
+                            ₦900
+                        </div>
+
+                        <div class="plan-features">
+
+                            <div>
+                                <i class="bi bi-check-circle-fill"></i>
+                                Instant delivery
+                            </div>
+
+                            <div>
+                                <i class="bi bi-check-circle-fill"></i>
+                                Secure payment
+                            </div>
+
+                            <div>
+                                <i class="bi bi-check-circle-fill"></i>
+                                Glo network
+                            </div>
+
+                        </div>
+
+                        <a
+                            href="buy-data.html?network=glo&plan=2gb"
+                            class="btn-buy-plan"
+                        >
+                            Buy Now
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="col-md-6 col-lg-4 plan-item"
+                    data-network="glo"
+                    data-search="glo 5gb 30 days"
+                >
+
+                    <div class="plan-card">
+
+                        <div class="plan-top">
+
+                            <div class="network-badge glo-badge">
+                                Glo
+                            </div>
+
+                            <span class="plan-network">
+                                Glo Nigeria
+                            </span>
+
+                        </div>
+
+                        <div class="plan-data">
+                            5GB
+                        </div>
+
+                        <div class="plan-validity">
+                            Valid for 30 days
+                        </div>
+
+                        <div class="plan-price">
+                            ₦2,000
+                        </div>
+
+                        <div class="plan-features">
+
+                            <div>
+                                <i class="bi bi-check-circle-fill"></i>
+                                Instant delivery
+                            </div>
+
+                            <div>
+                                <i class="bi bi-check-circle-fill"></i>
+                                Secure payment
+                            </div>
+
+                            <div>
+                                <i class="bi bi-check-circle-fill"></i>
+                                Glo network
+                            </div>
+
+                        </div>
+
+                        <a
+                            href="buy-data.html?network=glo&plan=5gb"
+                            class="btn-buy-plan"
+                        >
+                            Buy Now
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ==============================
+                     9MOBILE PLANS
+                =============================== -->
+
+                <div
+                    class="col-md-6 col-lg-4 plan-item"
+                    data-network="9mobile"
+                    data-search="9mobile 1gb 30 days"
+                >
+
+                    <div class="plan-card">
+
+                        <div class="plan-top">
+
+                            <div class="network-badge nine-badge">
+                                9M
+                            </div>
+
+                            <span class="plan-network">
+                                9mobile Nigeria
+                            </span>
+
+                        </div>
+
+                        <div class="plan-data">
+                            1GB
+                        </div>
+
+                        <div class="plan-validity">
+                            Valid for 30 days
+                        </div>
+
+                        <div class="plan-price">
+                            ₦500
+                        </div>
+
+                        <div class="plan-features">
+
+                            <div>
+                                <i class="bi bi-check-circle-fill"></i>
+                                Instant delivery
+                            </div>
+
+                            <div>
+                                <i class="bi bi-check-circle-fill"></i>
+                                Secure payment
+                            </div>
+
+                            <div>
+                                <i class="bi bi-check-circle-fill"></i>
+                                9mobile network
+                            </div>
+
+                        </div>
+
+                        <a
+                            href="buy-data.html?network=9mobile&plan=1gb"
+                            class="btn-buy-plan"
+                        >
+                            Buy Now
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="col-md-6 col-lg-4 plan-item"
+                    data-network="9mobile"
+                    data-search="9mobile 2gb 30 days"
+                >
+
+                    <div class="plan-card">
+
+                        <div class="plan-top">
+
+                            <div class="network-badge nine-badge">
+                                9M
+                            </div>
+
+                            <span class="plan-network">
+                                9mobile Nigeria
+                            </span>
+
+                        </div>
+
+                        <div class="plan-data">
+                            2GB
+                        </div>
+
+                        <div class="plan-validity">
+                            Valid for 30 days
+                        </div>
+
+                        <div class="plan-price">
+                            ₦900
+                        </div>
+
+                        <div class="plan-features">
+
+                            <div>
+                                <i class="bi bi-check-circle-fill"></i>
+                                Instant delivery
+                            </div>
+
+                            <div>
+                                <i class="bi bi-check-circle-fill"></i>
+                                Secure payment
+                            </div>
+
+                            <div>
+                                <i class="bi bi-check-circle-fill"></i>
+                                9mobile network
+                            </div>
+
+                        </div>
+
+                        <a
+                            href="buy-data.html?network=9mobile&plan=2gb"
+                            class="btn-buy-plan"
+                        >
+                            Buy Now
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="col-md-6 col-lg-4 plan-item"
+                    data-network="9mobile"
+                    data-search="9mobile 5gb 30 days"
+                >
+
+                    <div class="plan-card">
+
+                        <div class="plan-top">
+
+                            <div class="network-badge nine-badge">
+                                9M
+                            </div>
+
+                            <span class="plan-network">
+                                9mobile Nigeria
+                            </span>
+
+                        </div>
+
+                        <div class="plan-data">
+                            5GB
+                        </div>
+
+                        <div class="plan-validity">
+                            Valid for 30 days
+                        </div>
+
+                        <div class="plan-price">
+                            ₦2,000
+                        </div>
+
+                        <div class="plan-features">
+
+                            <div>
+                                <i class="bi bi-check-circle-fill"></i>
+                                Instant delivery
+                            </div>
+
+                            <div>
+                                <i class="bi bi-check-circle-fill"></i>
+                                Secure payment
+                            </div>
+
+                            <div>
+                                <i class="bi bi-check-circle-fill"></i>
+                                9mobile network
+                            </div>
+
+                        </div>
+
+                        <a
+                            href="buy-data.html?network=9mobile&plan=5gb"
+                            class="btn-buy-plan"
+                        >
+                            Buy Now
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- No Results -->
+            <div
+                id="emptyPlans"
+                class="empty-plans"
+            >
+
+                <i class="bi bi-search"></i>
+
+                <h4>
+                    No data plans found
+                </h4>
+
+                <p>
+                    Try another network or search term.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         FOOTER
+    ========================================== -->
+    <footer class="idiza-footer">
+
+        <div class="container">
+
+            <div class="row g-4">
+
+                <div class="col-lg-4">
+
+                    <h4 class="fw-bold text-white">
+                        IDIZA
+                    </h4>
+
+                    <p>
+                        Affordable and reliable mobile data services
+                        built to keep you connected.
+                    </p>
+
+                </div>
+
+
+                <div class="col-6 col-lg-2">
+
+                    <h6 class="text-white">
+                        Company
+                    </h6>
+
+                    <ul class="list-unstyled">
+
+                        <li>
+                            <a href="about.html">
+                                About
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="contact.html">
+                                Contact
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="col-6 col-lg-2">
+
+                    <h6 class="text-white">
+                        Services
+                    </h6>
+
+                    <ul class="list-unstyled">
+
+                        <li>
+                            <a href="data-plans.html">
+                                Data Plans
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="buy-data.html">
+                                Buy Data
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="col-6 col-lg-2">
+
+                    <h6 class="text-white">
+                        Account
+                    </h6>
+
+                    <ul class="list-unstyled">
+
+                        <li>
+                            <a href="login.html">
+                                Login
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="register.html">
+                                Register
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="col-6 col-lg-2">
+
+                    <h6 class="text-white">
+                        Support
+                    </h6>
+
+                    <ul class="list-unstyled">
+
+                        <li>
+                            <a href="contact.html">
+                                Help Center
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="contact.html">
+                                Contact Us
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+            <hr>
+
+
+            <div class="footer-bottom">
+
+                <p class="mb-0">
+                    © 2026 IDIZA. All rights reserved.
+                </p>
+
+                <div class="d-flex gap-3">
+
+                    <a href="#">
+                        <i class="bi bi-facebook"></i>
+                    </a>
+
+                    <a href="#">
+                        <i class="bi bi-instagram"></i>
+                    </a>
+
+                    <a href="#">
+                        <i class="bi bi-twitter-x"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- Bootstrap JS -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    ></script>
+
+
+    <!-- =========================================
+         DATA PLANS FILTER SCRIPT
+    ========================================== -->
+    <script>
+
+        const networkButtons =
+            document.querySelectorAll(".network-btn");
+
+        const planItems =
+            document.querySelectorAll(".plan-item");
+
+        const searchInput =
+            document.getElementById("planSearch");
+
+        const emptyPlans =
+            document.getElementById("emptyPlans");
+
+        let selectedNetwork = "all";
+
+
+        function filterPlans() {
+
+            const searchValue =
+                searchInput.value
+                    .toLowerCase()
+                    .trim();
+
+            let visiblePlans = 0;
+
+
+            planItems.forEach(function(plan) {
+
+                const network =
+                    plan.dataset.network;
+
+                const searchText =
+                    plan.dataset.search.toLowerCase();
+
+
+                const networkMatches =
+                    selectedNetwork === "all" ||
+                    network === selectedNetwork;
+
+
+                const searchMatches =
+                    searchValue === "" ||
+                    searchText.includes(searchValue);
+
+
+                if (networkMatches && searchMatches) {
+
+                    plan.style.display = "";
+
+                    visiblePlans++;
+
+                } else {
+
+                    plan.style.display = "none";
+
+                }
+
+            });
+
+
+            if (visiblePlans === 0) {
+
+                emptyPlans.style.display = "block";
+
+            } else {
+
+                emptyPlans.style.display = "none";
+
+            }
+
+        }
+
+
+        networkButtons.forEach(function(button) {
+
+            button.addEventListener("click", function() {
+
+                networkButtons.forEach(function(btn) {
+
+                    btn.classList.remove("active");
+
+                });
+
+
+                this.classList.add("active");
+
+                selectedNetwork =
+                    this.dataset.network;
+
+                filterPlans();
+
+            });
+
+        });
+
+
+        searchInput.addEventListener(
+            "input",
+            filterPlans
+        );
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,1143 @@
+/* =====================================================
+   IDIZA DESIGN SYSTEM
+===================================================== */
+
+:root {
+
+    --idiza-navy: #081b33;
+    --idiza-navy-light: #102c4d;
+
+    --idiza-blue: #1677ff;
+    --idiza-blue-dark: #0d63d7;
+
+    --idiza-white: #ffffff;
+    --idiza-light: #f6f8fb;
+
+    --idiza-text: #172033;
+    --idiza-muted: #667085;
+
+    --idiza-border: #e4e8ef;
+
+    --idiza-success: #16a36a;
+
+}
+
+
+/* =====================================================
+   GLOBAL
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+
+    font-family: "Inter", sans-serif;
+
+    background: var(--idiza-white);
+
+    color: var(--idiza-text);
+
+    line-height: 1.6;
+
+}
+
+
+a {
+    text-decoration: none;
+}
+
+
+img {
+    max-width: 100%;
+}
+
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+.idiza-navbar {
+
+    background: var(--idiza-navy);
+
+    padding: 18px 0;
+
+}
+
+
+.idiza-logo {
+
+    color: white !important;
+
+    font-size: 28px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+
+}
+
+
+.idiza-navbar .nav-link {
+
+    color: #d9e3ef;
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+    margin: 0 10px;
+
+    transition: 0.2s;
+
+}
+
+
+.idiza-navbar .nav-link:hover,
+.idiza-navbar .nav-link.active {
+
+    color: white;
+
+}
+
+
+.nav-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+}
+
+
+.btn-login {
+
+    color: white;
+
+    font-weight: 600;
+
+}
+
+
+.btn-login:hover {
+
+    color: #d9e3ef;
+
+}
+
+
+.btn-idiza {
+
+    background: var(--idiza-blue);
+
+    color: white;
+
+    border: none;
+
+    font-weight: 600;
+
+    border-radius: 8px;
+
+    padding: 11px 20px;
+
+    transition: 0.2s;
+
+}
+
+
+.btn-idiza:hover {
+
+    background: var(--idiza-blue-dark);
+
+    color: white;
+
+    transform: translateY(-1px);
+
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero-section {
+
+    background: var(--idiza-navy);
+
+    color: white;
+
+    padding: 100px 0 120px;
+
+    overflow: hidden;
+
+}
+
+
+.hero-content {
+
+    position: relative;
+
+    z-index: 2;
+
+}
+
+
+.hero-badge {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    background: rgba(255,255,255,0.08);
+
+    border: 1px solid rgba(255,255,255,0.12);
+
+    border-radius: 50px;
+
+    padding: 8px 14px;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    color: #dce9f8;
+
+    margin-bottom: 25px;
+
+}
+
+
+.hero-badge i {
+
+    color: #5da3ff;
+
+}
+
+
+.hero-content h1 {
+
+    font-size: clamp(42px, 6vw, 70px);
+
+    line-height: 1.05;
+
+    font-weight: 800;
+
+    letter-spacing: -2.5px;
+
+    margin-bottom: 25px;
+
+}
+
+
+.hero-content h1 span {
+
+    color: #4c9cff;
+
+}
+
+
+.hero-description {
+
+    max-width: 560px;
+
+    font-size: 18px;
+
+    color: #b9c9da;
+
+    margin-bottom: 32px;
+
+}
+
+
+.hero-buttons {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+
+}
+
+
+.hero-buttons .btn {
+
+    border-radius: 8px;
+
+    padding: 13px 23px;
+
+    font-weight: 600;
+
+}
+
+
+.hero-trust {
+
+    display: flex;
+
+    gap: 25px;
+
+    margin-top: 35px;
+
+}
+
+
+.trust-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: #aebfd2;
+
+    font-size: 13px;
+
+}
+
+
+.trust-item i {
+
+    color: #55d99a;
+
+    font-size: 17px;
+
+}
+
+
+/* =====================================================
+   HERO VISUAL
+===================================================== */
+
+.hero-visual {
+
+    position: relative;
+
+    min-height: 430px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+
+.data-preview-card {
+
+    width: 360px;
+
+    background: white;
+
+    color: var(--idiza-text);
+
+    border-radius: 18px;
+
+    padding: 28px;
+
+    box-shadow: 0 30px 70px rgba(0,0,0,0.25);
+
+}
+
+
+.preview-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    color: var(--idiza-muted);
+
+    font-size: 13px;
+
+}
+
+
+.data-amount {
+
+    margin: 35px 0 25px;
+
+}
+
+
+.data-amount strong {
+
+    font-size: 64px;
+
+    font-weight: 800;
+
+}
+
+
+.data-amount span {
+
+    font-size: 22px;
+
+    color: var(--idiza-muted);
+
+    margin-left: 5px;
+
+}
+
+
+.data-progress .progress {
+
+    height: 9px;
+
+    background: #edf1f5;
+
+    border-radius: 20px;
+
+}
+
+
+.data-progress .progress-bar {
+
+    background: var(--idiza-blue);
+
+    border-radius: 20px;
+
+}
+
+
+.preview-footer {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-top: 20px;
+
+    font-size: 12px;
+
+    color: var(--idiza-muted);
+
+}
+
+
+/* Floating card */
+
+.floating-card {
+
+    position: absolute;
+
+    right: 15px;
+
+    bottom: 25px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    background: white;
+
+    color: var(--idiza-text);
+
+    padding: 15px 18px;
+
+    border-radius: 12px;
+
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+
+}
+
+
+.floating-card small {
+
+    display: block;
+
+    color: var(--idiza-muted);
+
+    font-size: 10px;
+
+}
+
+
+.floating-card strong {
+
+    display: block;
+
+    font-size: 13px;
+
+}
+
+
+.floating-icon {
+
+    width: 38px;
+
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #e8f8f0;
+
+    color: var(--idiza-success);
+
+}
+
+
+/* =====================================================
+   GENERAL SECTIONS
+===================================================== */
+
+.section-padding {
+
+    padding: 90px 0;
+
+}
+
+
+.section-heading {
+
+    max-width: 650px;
+
+    margin: 0 auto 50px;
+
+}
+
+
+.section-label {
+
+    display: inline-block;
+
+    color: var(--idiza-blue);
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+
+    margin-bottom: 12px;
+
+}
+
+
+.section-heading h2 {
+
+    font-size: 38px;
+
+    font-weight: 800;
+
+    letter-spacing: -1px;
+
+    margin-bottom: 12px;
+
+}
+
+
+.section-heading p {
+
+    color: var(--idiza-muted);
+
+    margin: 0;
+
+}
+
+
+/* =====================================================
+   NETWORK CARDS
+===================================================== */
+
+.network-card {
+
+    background: white;
+
+    border: 1px solid var(--idiza-border);
+
+    border-radius: 14px;
+
+    padding: 28px;
+
+    text-align: center;
+
+    height: 100%;
+
+    transition: 0.25s;
+
+}
+
+
+.network-card:hover {
+
+    transform: translateY(-5px);
+
+    box-shadow: 0 18px 40px rgba(15,35,60,0.08);
+
+}
+
+
+.network-logo {
+
+    width: 65px;
+
+    height: 65px;
+
+    border-radius: 16px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin: 0 auto 20px;
+
+    font-weight: 800;
+
+    font-size: 19px;
+
+}
+
+
+.mtn-logo {
+
+    background: #ffd900;
+
+    color: #111;
+
+}
+
+
+.airtel-logo {
+
+    background: #e60012;
+
+    color: white;
+
+}
+
+
+.glo-logo {
+
+    background: #78b82a;
+
+    color: white;
+
+}
+
+
+.nine-logo {
+
+    background: #00a859;
+
+    color: white;
+
+}
+
+
+.network-card h4 {
+
+    font-size: 18px;
+
+    font-weight: 700;
+
+}
+
+
+.network-card p {
+
+    color: var(--idiza-muted);
+
+    font-size: 13px;
+
+    margin-bottom: 18px;
+
+}
+
+
+.network-link {
+
+    color: var(--idiza-blue);
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+}
+
+
+.network-link i {
+
+    margin-left: 5px;
+
+}
+
+
+/* =====================================================
+   FEATURES
+===================================================== */
+
+.features-section {
+
+    background: var(--idiza-light);
+
+}
+
+
+.feature-card {
+
+    background: white;
+
+    border: 1px solid var(--idiza-border);
+
+    border-radius: 14px;
+
+    padding: 30px;
+
+    height: 100%;
+
+}
+
+
+.feature-icon {
+
+    width: 48px;
+
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: #eaf3ff;
+
+    color: var(--idiza-blue);
+
+    font-size: 21px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.feature-card h4 {
+
+    font-size: 17px;
+
+    font-weight: 700;
+
+}
+
+
+.feature-card p {
+
+    color: var(--idiza-muted);
+
+    font-size: 13px;
+
+    margin-bottom: 0;
+
+}
+
+
+/* =====================================================
+   HOW IT WORKS
+===================================================== */
+
+.step-card {
+
+    text-align: center;
+
+    position: relative;
+
+}
+
+
+.step-number {
+
+    color: #c8d0db;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.step-icon {
+
+    width: 65px;
+
+    height: 65px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin: 0 auto 20px;
+
+    border-radius: 50%;
+
+    background: #eaf3ff;
+
+    color: var(--idiza-blue);
+
+    font-size: 24px;
+
+}
+
+
+.step-card h4 {
+
+    font-size: 18px;
+
+    font-weight: 700;
+
+}
+
+
+.step-card p {
+
+    color: var(--idiza-muted);
+
+    font-size: 14px;
+
+    max-width: 300px;
+
+    margin: auto;
+
+}
+
+
+/* =====================================================
+   CTA
+===================================================== */
+
+.cta-section {
+
+    padding: 20px 0 90px;
+
+}
+
+
+.cta-box {
+
+    background: var(--idiza-blue);
+
+    color: white;
+
+    border-radius: 18px;
+
+    padding: 55px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 30px;
+
+}
+
+
+.cta-box .section-label {
+
+    color: #bcd9ff;
+
+}
+
+
+.cta-box h2 {
+
+    font-size: 32px;
+
+    font-weight: 800;
+
+    max-width: 650px;
+
+}
+
+
+.cta-box p {
+
+    color: #d8e8ff;
+
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.idiza-footer {
+
+    background: #061426;
+
+    color: #98aabd;
+
+    padding: 70px 0 25px;
+
+}
+
+
+.footer-logo {
+
+    color: white;
+
+    font-size: 27px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+}
+
+
+.footer-description {
+
+    max-width: 350px;
+
+    font-size: 13px;
+
+    margin-top: 18px;
+
+}
+
+
+.idiza-footer h5 {
+
+    color: white;
+
+    font-size: 14px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.idiza-footer ul {
+
+    list-style: none;
+
+    padding: 0;
+
+    margin: 0;
+
+}
+
+
+.idiza-footer li {
+
+    margin-bottom: 10px;
+
+    font-size: 13px;
+
+}
+
+
+.idiza-footer a {
+
+    color: #98aabd;
+
+}
+
+
+.idiza-footer a:hover {
+
+    color: white;
+
+}
+
+
+.social-links {
+
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 22px;
+
+}
+
+
+.social-links a {
+
+    width: 35px;
+
+    height: 35px;
+
+    border: 1px solid #26374a;
+
+    border-radius: 8px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+
+.idiza-footer hr {
+
+    border-color: #1e3043;
+
+    margin: 45px 0 25px;
+
+}
+
+
+.footer-bottom {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    font-size: 11px;
+
+}
+
+
+.footer-bottom p {
+
+    margin: 0;
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 991px) {
+
+    .nav-actions {
+
+        margin-top: 15px;
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+    }
+
+
+    .hero-section {
+
+        padding: 75px 0;
+
+    }
+
+
+    .hero-visual {
+
+        margin-top: 60px;
+
+    }
+
+}
+
+
+@media (max-width: 767px) {
+
+    .section-padding {
+
+        padding: 65px 0;
+
+    }
+
+
+    .section-heading h2 {
+
+        font-size: 30px;
+
+    }
+
+
+    .hero-content h1 {
+
+        letter-spacing: -1.5px;
+
+    }
+
+
+    .hero-trust {
+
+        flex-direction: column;
+
+        gap: 10px;
+
+    }
+
+
+    .data-preview-card {
+
+        width: 100%;
+
+        max-width: 350px;
+
+    }
+
+
+    .floating-card {
+
+        right: 0;
+
+    }
+
+
+    .cta-box {
+
+        padding: 35px 25px;
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+    }
+
+
+    .cta-box h2 {
+
+        font-size: 27px;
+
+    }
+
+
+    .footer-bottom {
+
+        flex-direction: column;
+
+    }
+
+}

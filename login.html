@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login - IDIZA</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <style>
+        body {
+            background: #f6f8fb;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .login-section {
+            min-height: calc(100vh - 76px);
+            display: flex;
+            align-items: center;
+            padding: 70px 0;
+        }
+
+        .login-wrapper {
+            max-width: 1050px;
+            margin: auto;
+        }
+
+        .login-info {
+            background: linear-gradient(135deg, #081b33, #102c4d);
+            color: white;
+            min-height: 560px;
+            border-radius: 20px 0 0 20px;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .login-info h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .login-info p {
+            color: rgba(255,255,255,0.75);
+            line-height: 1.8;
+        }
+
+        .login-feature {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .login-feature-icon {
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4da3ff;
+            font-size: 20px;
+        }
+
+        .login-feature strong {
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .login-feature span {
+            font-size: 13px;
+            color: rgba(255,255,255,0.65);
+        }
+
+        .login-card {
+            background: white;
+            min-height: 560px;
+            border-radius: 0 20px 20px 0;
+            padding: 50px;
+            box-shadow: 0 15px 45px rgba(8, 27, 51, 0.08);
+        }
+
+        .login-card h2 {
+            font-size: 28px;
+            font-weight: 800;
+            color: #081b33;
+            margin-bottom: 8px;
+        }
+
+        .login-subtitle {
+            color: #667085;
+            margin-bottom: 30px;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #172033;
+            margin-bottom: 8px;
+        }
+
+        .input-group-custom {
+            position: relative;
+        }
+
+        .input-group-custom .form-control {
+            height: 52px;
+            border: 1px solid #e4e8ef;
+            border-radius: 10px;
+            padding: 0 45px 0 15px;
+            font-size: 14px;
+        }
+
+        .input-group-custom .form-control:focus {
+            border-color: #1677ff;
+            box-shadow: 0 0 0 3px rgba(22,119,255,0.1);
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #667085;
+            z-index: 5;
+        }
+
+        .input-group-custom .with-icon {
+            padding-left: 43px;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 13px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: transparent;
+            color: #667085;
+            z-index: 5;
+            cursor: pointer;
+        }
+
+        .password-toggle:hover {
+            color: #1677ff;
+        }
+
+        .remember-me {
+            color: #667085;
+            font-size: 14px;
+        }
+
+        .remember-me input {
+            margin-right: 7px;
+        }
+
+        .forgot-link {
+            color: #1677ff;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .forgot-link:hover {
+            color: #0d63d7;
+        }
+
+        .login-btn {
+            width: 100%;
+            height: 52px;
+            border: none;
+            border-radius: 10px;
+            background: #1677ff;
+            color: white;
+            font-weight: 700;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .login-btn:hover {
+            background: #0d63d7;
+            transform: translateY(-1px);
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: #98a2b3;
+            font-size: 13px;
+            margin: 28px 0;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #e4e8ef;
+        }
+
+        .register-text {
+            text-align: center;
+            color: #667085;
+            font-size: 14px;
+        }
+
+        .register-text a {
+            color: #1677ff;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .register-text a:hover {
+            color: #0d63d7;
+        }
+
+        .alert {
+            font-size: 14px;
+        }
+
+        @media (max-width: 991px) {
+            .login-info {
+                border-radius: 20px 20px 0 0;
+                min-height: auto;
+                padding: 40px;
+            }
+
+            .login-card {
+                border-radius: 0 0 20px 20px;
+                min-height: auto;
+            }
+        }
+
+        @media (max-width: 575px) {
+            .login-section {
+                padding: 35px 15px;
+            }
+
+            .login-info,
+            .login-card {
+                padding: 30px 25px;
+            }
+
+            .login-info h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top border-bottom">
+    <div class="container">
+
+        <a class="navbar-brand fw-bold fs-3" href="index.html">
+            <span style="color:#1677ff;">ID</span><span style="color:#081b33;">IZA</span>
+        </a>
+
+        <button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#mainNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainNavbar">
+
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="data-plans.html">Data Plans</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">About</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="contact.html">Contact</a>
+                </li>
+
+            </ul>
+
+            <div class="d-flex gap-2">
+
+                <a href="login.html"
+                   class="btn btn-primary px-4">
+                    Login
+                </a>
+
+                <a href="register.html"
+                   class="btn btn-outline-primary px-4">
+                    Create Account
+                </a>
+
+            </div>
+
+        </div>
+    </div>
+</nav>
+
+
+<!-- ================= LOGIN SECTION ================= -->
+<section class="login-section">
+
+    <div class="container">
+
+        <div class="row login-wrapper g-0">
+
+            <!-- LEFT SIDE -->
+            <div class="col-lg-6">
+
+                <div class="login-info">
+
+                    <div class="mb-4">
+                        <span class="badge bg-primary-subtle text-primary px-3 py-2">
+                            Welcome Back
+                        </span>
+                    </div>
+
+                    <h1>
+                        Welcome back to IDIZA.
+                    </h1>
+
+                    <p>
+                        Log in to your IDIZA account and manage your
+                        mobile data purchases quickly, securely and easily.
+                    </p>
+
+
+                    <div class="login-feature">
+
+                        <div class="login-feature-icon">
+                            <i class="bi bi-lightning-charge-fill"></i>
+                        </div>
+
+                        <div>
+                            <strong>Fast Data Delivery</strong>
+                            <span>
+                                Get your data delivered quickly after payment.
+                            </span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="login-feature">
+
+                        <div class="login-feature-icon">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+
+                        <div>
+                            <strong>Secure Transactions</strong>
+                            <span>
+                                Your account and payments are protected.
+                            </span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="login-feature">
+
+                        <div class="login-feature-icon">
+                            <i class="bi bi-clock-history"></i>
+                        </div>
+
+                        <div>
+                            <strong>Track Your Purchases</strong>
+                            <span>
+                                View your previous data transactions anytime.
+                            </span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- RIGHT SIDE -->
+            <div class="col-lg-6">
+
+                <div class="login-card">
+
+                    <h2>Sign In</h2>
+
+                    <p class="login-subtitle">
+                        Enter your account details to continue.
+                    </p>
+
+
+                    <!-- Alert -->
+                    <div id="loginAlert"></div>
+
+
+                    <!-- LOGIN FORM -->
+                    <form id="loginForm">
+
+                        <!-- Email / Phone -->
+                        <div class="mb-4">
+
+                            <label class="form-label">
+                                Email or Phone Number
+                            </label>
+
+                            <div class="input-group-custom">
+
+                                <i class="bi bi-person input-icon"></i>
+
+                                <input
+                                    type="text"
+                                    id="loginIdentifier"
+                                    class="form-control with-icon"
+                                    placeholder="Enter email or phone number"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Password -->
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Password
+                            </label>
+
+                            <div class="input-group-custom">
+
+                                <i class="bi bi-lock input-icon"></i>
+
+                                <input
+                                    type="password"
+                                    id="loginPassword"
+                                    class="form-control with-icon"
+                                    placeholder="Enter your password"
+                                    required
+                                >
+
+                                <button
+                                    type="button"
+                                    class="password-toggle"
+                                    id="togglePassword"
+                                    aria-label="Show password">
+
+                                    <i class="bi bi-eye"></i>
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Remember / Forgot -->
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+
+                            <label class="remember-me">
+                                <input
+                                    type="checkbox"
+                                    id="rememberMe">
+                                Remember me
+                            </label>
+
+                            <a href="forgot-password.html"
+                               class="forgot-link">
+                                Forgot Password?
+                            </a>
+
+                        </div>
+
+
+                        <!-- Login Button -->
+                        <button
+                            type="submit"
+                            class="login-btn">
+
+                            <i class="bi bi-box-arrow-in-right me-2"></i>
+                            Login
+
+                        </button>
+
+                    </form>
+
+
+                    <div class="divider">
+                        OR
+                    </div>
+
+
+                    <!-- REGISTER -->
+                    <div class="register-text">
+
+                        Don't have an account?
+
+                        <a href="register.html">
+                            Create an account
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+<footer class="bg-dark text-white py-4">
+
+    <div class="container">
+
+        <div class="row align-items-center">
+
+            <div class="col-md-6">
+
+                <h5 class="fw-bold mb-1">
+                    <span style="color:#1677ff;">ID</span>IZA
+                </h5>
+
+                <p class="text-white-50 mb-0 small">
+                    Simple, fast and reliable mobile data.
+                </p>
+
+            </div>
+
+
+            <div class="col-md-6 text-md-end mt-3 mt-md-0">
+
+                <a href="index.html"
+                   class="text-white-50 text-decoration-none me-3">
+                    Home
+                </a>
+
+                <a href="data-plans.html"
+                   class="text-white-50 text-decoration-none me-3">
+                    Data Plans
+                </a>
+
+                <a href="contact.html"
+                   class="text-white-50 text-decoration-none">
+                    Contact
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <hr class="border-secondary my-3">
+
+
+        <div class="text-center text-white-50 small">
+            © 2026 IDIZA. All rights reserved.
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<!-- Login JavaScript -->
+<script>
+
+    // ==============================
+    // SHOW / HIDE PASSWORD
+    // ==============================
+
+    const togglePassword = document.getElementById("togglePassword");
+    const passwordInput = document.getElementById("loginPassword");
+
+    togglePassword.addEventListener("click", function () {
+
+        const icon = this.querySelector("i");
+
+        if (passwordInput.type === "password") {
+
+            passwordInput.type = "text";
+
+            icon.classList.remove("bi-eye");
+            icon.classList.add("bi-eye-slash");
+
+        } else {
+
+            passwordInput.type = "password";
+
+            icon.classList.remove("bi-eye-slash");
+            icon.classList.add("bi-eye");
+
+        }
+
+    });
+
+
+    // ==============================
+    // FRONTEND LOGIN DEMO
+    // ==============================
+
+    const loginForm = document.getElementById("loginForm");
+    const loginAlert = document.getElementById("loginAlert");
+
+    loginForm.addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        const identifier =
+            document.getElementById("loginIdentifier").value.trim();
+
+        const password =
+            document.getElementById("loginPassword").value.trim();
+
+
+        if (identifier === "" || password === "") {
+
+            loginAlert.innerHTML = `
+                <div class="alert alert-danger">
+                    <i class="bi bi-exclamation-circle me-2"></i>
+                    Please enter your login details.
+                </div>
+            `;
+
+            return;
+        }
+
+
+        loginAlert.innerHTML = `
+            <div class="alert alert-info">
+                <i class="bi bi-info-circle me-2"></i>
+                Login is currently in frontend demo mode.
+                PHP and MySQL authentication will be connected later.
+            </div>
+        `;
+
+    });
+
+</script>
+
+</body>
+</html>

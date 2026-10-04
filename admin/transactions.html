@@ -1,0 +1,1843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Transactions | IDIZA Admin</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+        rel="stylesheet"
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <style>
+        :root {
+            --idiza-navy: #081b33;
+            --idiza-navy-light: #102c4d;
+            --idiza-blue: #1677ff;
+            --idiza-blue-dark: #0d63d7;
+            --idiza-light: #f6f8fb;
+            --idiza-text: #172033;
+            --idiza-muted: #667085;
+            --idiza-border: #e4e8ef;
+            --idiza-success: #16a36a;
+            --idiza-danger: #dc3545;
+            --idiza-warning: #f59e0b;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: var(--idiza-light);
+            color: var(--idiza-text);
+            font-family: "Inter", sans-serif;
+        }
+
+        /* SIDEBAR */
+
+        .admin-sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 260px;
+            background: var(--idiza-navy);
+            color: #fff;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .sidebar-logo {
+            height: 76px;
+            display: flex;
+            align-items: center;
+            padding: 0 25px;
+            border-bottom: 1px solid rgba(255,255,255,.08);
+        }
+
+        .sidebar-logo a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 25px;
+            font-weight: 800;
+        }
+
+        .sidebar-logo span {
+            color: #4b98ff;
+        }
+
+        .sidebar-section {
+            padding: 25px 15px 10px;
+            color: #7f94ad;
+            font-size: 11px;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: .08em;
+        }
+
+        .sidebar-nav {
+            padding: 0 12px 20px;
+        }
+
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #b7c5d5;
+            text-decoration: none;
+            padding: 12px 14px;
+            border-radius: 9px;
+            margin-bottom: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: .2s ease;
+        }
+
+        .sidebar-nav a i {
+            font-size: 18px;
+            width: 22px;
+        }
+
+        .sidebar-nav a:hover,
+        .sidebar-nav a.active {
+            background: rgba(22,119,255,.16);
+            color: #fff;
+        }
+
+        .sidebar-nav a.active {
+            box-shadow: inset 3px 0 0 var(--idiza-blue);
+        }
+
+        /* MAIN */
+
+        .admin-main {
+            margin-left: 260px;
+            min-height: 100vh;
+        }
+
+        .admin-topbar {
+            height: 76px;
+            background: #fff;
+            border-bottom: 1px solid var(--idiza-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+        }
+
+        .topbar-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .admin-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .admin-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--idiza-blue);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .admin-profile-name {
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .admin-profile-role {
+            font-size: 11px;
+            color: var(--idiza-muted);
+        }
+
+        .admin-content {
+            padding: 30px;
+        }
+
+        /* HEADER */
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .page-title {
+            font-size: 27px;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+
+        .page-subtitle {
+            color: var(--idiza-muted);
+            margin: 0;
+            font-size: 14px;
+        }
+
+        /* STATS */
+
+        .stat-card {
+            background: #fff;
+            border: 1px solid var(--idiza-border);
+            border-radius: 12px;
+            padding: 20px;
+            height: 100%;
+        }
+
+        .stat-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #edf5ff;
+            color: var(--idiza-blue);
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .stat-number {
+            font-size: 23px;
+            font-weight: 800;
+            margin-bottom: 3px;
+        }
+
+        .stat-label {
+            color: var(--idiza-muted);
+            font-size: 12px;
+        }
+
+        /* FILTER */
+
+        .filter-card {
+            background: #fff;
+            border: 1px solid var(--idiza-border);
+            border-radius: 12px;
+            padding: 18px;
+            margin-top: 25px;
+        }
+
+        .form-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #344054;
+            margin-bottom: 7px;
+        }
+
+        .form-control,
+        .form-select {
+            min-height: 42px;
+            border-color: var(--idiza-border);
+            border-radius: 8px;
+            font-size: 13px;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: var(--idiza-blue);
+            box-shadow: 0 0 0 .2rem rgba(22,119,255,.10);
+        }
+
+        /* TRANSACTIONS CARD */
+
+        .transactions-card {
+            background: #fff;
+            border: 1px solid var(--idiza-border);
+            border-radius: 12px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+
+        .table-header {
+            padding: 18px 20px;
+            border-bottom: 1px solid var(--idiza-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .table-header h5 {
+            font-size: 15px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .transaction-count {
+            color: var(--idiza-muted);
+            font-size: 12px;
+        }
+
+        .table {
+            margin: 0;
+            min-width: 1150px;
+        }
+
+        .table thead th {
+            background: #fafbfc;
+            border-bottom: 1px solid var(--idiza-border);
+            color: #667085;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: .04em;
+            font-weight: 700;
+            padding: 13px 18px;
+            white-space: nowrap;
+        }
+
+        .table tbody td {
+            padding: 15px 18px;
+            border-bottom: 1px solid #eef1f5;
+            vertical-align: middle;
+            font-size: 13px;
+        }
+
+        .table tbody tr:last-child td {
+            border-bottom: 0;
+        }
+
+        .table tbody tr:hover {
+            background: #fbfcfe;
+        }
+
+        .transaction-id {
+            font-weight: 700;
+            color: var(--idiza-blue);
+            font-size: 12px;
+        }
+
+        .customer-name {
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+
+        .customer-phone {
+            color: var(--idiza-muted);
+            font-size: 11px;
+        }
+
+        .plan-name {
+            font-weight: 600;
+        }
+
+        .plan-network {
+            color: var(--idiza-muted);
+            font-size: 11px;
+            margin-top: 3px;
+        }
+
+        /* NETWORK */
+
+        .network-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 6px 9px;
+            border-radius: 7px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .network-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+        }
+
+        .network-mtn {
+            background: #fff8d9;
+            color: #725d00;
+        }
+
+        .network-mtn .network-dot {
+            background: #f2c400;
+        }
+
+        .network-airtel {
+            background: #fff0f1;
+            color: #b4232c;
+        }
+
+        .network-airtel .network-dot {
+            background: #e31b23;
+        }
+
+        .network-glo {
+            background: #eaf9f0;
+            color: #087a3d;
+        }
+
+        .network-glo .network-dot {
+            background: #16a34a;
+        }
+
+        .network-9mobile {
+            background: #e8fbfa;
+            color: #087c77;
+        }
+
+        .network-9mobile .network-dot {
+            background: #10a6a0;
+        }
+
+        /* STATUS */
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 9px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .status-badge::before {
+            content: "";
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+        }
+
+        .status-success {
+            background: #e9f8f0;
+            color: #087a3d;
+        }
+
+        .status-success::before {
+            background: #16a36a;
+        }
+
+        .status-pending {
+            background: #fff7e6;
+            color: #9a6700;
+        }
+
+        .status-pending::before {
+            background: #f59e0b;
+        }
+
+        .status-failed {
+            background: #fff0f1;
+            color: #b4232c;
+        }
+
+        .status-failed::before {
+            background: #dc3545;
+        }
+
+        .status-processing {
+            background: #edf5ff;
+            color: #1559b7;
+        }
+
+        .status-processing::before {
+            background: var(--idiza-blue);
+        }
+
+        /* ACTIONS */
+
+        .action-buttons {
+            display: flex;
+            gap: 6px;
+            justify-content: flex-end;
+        }
+
+        .action-btn {
+            width: 33px;
+            height: 33px;
+            border: 1px solid var(--idiza-border);
+            background: #fff;
+            border-radius: 7px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #667085;
+            transition: .2s ease;
+        }
+
+        .action-btn:hover {
+            color: var(--idiza-blue);
+            border-color: #b9d4ff;
+            background: #f5f9ff;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            border: 0;
+            background: transparent;
+            font-size: 24px;
+            color: var(--idiza-navy);
+        }
+
+        /* MODAL */
+
+        .modal-content {
+            border: 0;
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .modal-header {
+            padding: 20px 22px;
+            border-bottom: 1px solid var(--idiza-border);
+        }
+
+        .modal-title {
+            font-size: 17px;
+            font-weight: 700;
+        }
+
+        .modal-body {
+            padding: 22px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 12px 0;
+            border-bottom: 1px solid #eef1f5;
+        }
+
+        .detail-row:last-child {
+            border-bottom: 0;
+        }
+
+        .detail-label {
+            color: var(--idiza-muted);
+            font-size: 12px;
+        }
+
+        .detail-value {
+            font-size: 13px;
+            font-weight: 600;
+            text-align: right;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 991px) {
+
+            .admin-sidebar {
+                transform: translateX(-100%);
+                transition: .25s ease;
+            }
+
+            .admin-sidebar.show {
+                transform: translateX(0);
+            }
+
+            .admin-main {
+                margin-left: 0;
+            }
+
+            .mobile-menu-btn {
+                display: inline-block;
+            }
+
+            .admin-topbar {
+                padding: 0 18px;
+            }
+
+            .admin-content {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 767px) {
+
+            .page-header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .page-title {
+                font-size: 23px;
+            }
+
+            .admin-profile-name,
+            .admin-profile-role {
+                display: none;
+            }
+
+            .stat-card {
+                padding: 17px;
+            }
+
+            .filter-card {
+                padding: 15px;
+            }
+
+            .table-header {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- =========================
+     SIDEBAR
+========================= -->
+
+<aside class="admin-sidebar" id="adminSidebar">
+
+    <div class="sidebar-logo">
+        <a href="index.html">
+            IDI<span>ZA</span>
+        </a>
+    </div>
+
+    <div class="sidebar-section">
+        Main
+    </div>
+
+    <nav class="sidebar-nav">
+
+        <a href="index.html">
+            <i class="bi bi-grid-1x2-fill"></i>
+            Dashboard
+        </a>
+
+        <a href="users.html">
+            <i class="bi bi-people-fill"></i>
+            Users
+        </a>
+
+        <a href="data-plans.html">
+            <i class="bi bi-hdd-stack-fill"></i>
+            Data Plans
+        </a>
+
+        <a href="transactions.html" class="active">
+            <i class="bi bi-receipt"></i>
+            Transactions
+        </a>
+
+    </nav>
+
+    <div class="sidebar-section">
+        Management
+    </div>
+
+    <nav class="sidebar-nav">
+
+        <a href="settings.html">
+            <i class="bi bi-gear-fill"></i>
+            Settings
+        </a>
+
+        <a href="../index.html">
+            <i class="bi bi-box-arrow-up-right"></i>
+            View Website
+        </a>
+
+        <a href="../login.html">
+            <i class="bi bi-box-arrow-right"></i>
+            Logout
+        </a>
+
+    </nav>
+
+</aside>
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main class="admin-main">
+
+    <header class="admin-topbar">
+
+        <div class="d-flex align-items-center gap-3">
+
+            <button
+                class="mobile-menu-btn"
+                id="mobileMenuBtn"
+                type="button"
+            >
+                <i class="bi bi-list"></i>
+            </button>
+
+            <h1 class="topbar-title">
+                Transactions
+            </h1>
+
+        </div>
+
+        <div class="admin-profile">
+
+            <div>
+                <div class="admin-profile-name">
+                    Admin
+                </div>
+
+                <div class="admin-profile-role">
+                    Administrator
+                </div>
+            </div>
+
+            <div class="admin-avatar">
+                AD
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <section class="admin-content">
+
+        <!-- PAGE HEADER -->
+
+        <div class="page-header">
+
+            <div>
+                <h2 class="page-title">
+                    Transactions
+                </h2>
+
+                <p class="page-subtitle">
+                    Monitor customer payments and data delivery transactions.
+                </p>
+            </div>
+
+        </div>
+
+
+        <!-- STATS -->
+
+        <div class="row g-3">
+
+            <div class="col-12 col-sm-6 col-xl-3">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        <i class="bi bi-receipt"></i>
+                    </div>
+
+                    <div
+                        class="stat-number"
+                        id="totalTransactions"
+                    >
+                        8
+                    </div>
+
+                    <div class="stat-label">
+                        Total Transactions
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-12 col-sm-6 col-xl-3">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        <i class="bi bi-check-circle"></i>
+                    </div>
+
+                    <div
+                        class="stat-number"
+                        id="successfulTransactions"
+                    >
+                        5
+                    </div>
+
+                    <div class="stat-label">
+                        Successful
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-12 col-sm-6 col-xl-3">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        <i class="bi bi-clock"></i>
+                    </div>
+
+                    <div
+                        class="stat-number"
+                        id="pendingTransactions"
+                    >
+                        2
+                    </div>
+
+                    <div class="stat-label">
+                        Pending
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-12 col-sm-6 col-xl-3">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        <i class="bi bi-cash-stack"></i>
+                    </div>
+
+                    <div
+                        class="stat-number"
+                        id="totalRevenue"
+                    >
+                        ₦8,600
+                    </div>
+
+                    <div class="stat-label">
+                        Total Revenue
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- FILTERS -->
+
+        <div class="filter-card">
+
+            <div class="row g-3 align-items-end">
+
+                <div class="col-12 col-lg-4">
+
+                    <label class="form-label">
+                        Search
+                    </label>
+
+                    <div class="input-group">
+
+                        <span class="input-group-text bg-white border-end-0">
+                            <i class="bi bi-search text-muted"></i>
+                        </span>
+
+                        <input
+                            type="text"
+                            class="form-control border-start-0"
+                            id="searchTransaction"
+                            placeholder="ID, customer, phone or plan..."
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-12 col-sm-6 col-lg-2">
+
+                    <label class="form-label">
+                        Network
+                    </label>
+
+                    <select
+                        class="form-select"
+                        id="networkFilter"
+                    >
+
+                        <option value="all">
+                            All Networks
+                        </option>
+
+                        <option value="MTN">
+                            MTN
+                        </option>
+
+                        <option value="Airtel">
+                            Airtel
+                        </option>
+
+                        <option value="Glo">
+                            Glo
+                        </option>
+
+                        <option value="9mobile">
+                            9mobile
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="col-12 col-sm-6 col-lg-2">
+
+                    <label class="form-label">
+                        Payment
+                    </label>
+
+                    <select
+                        class="form-select"
+                        id="paymentFilter"
+                    >
+
+                        <option value="all">
+                            All Payments
+                        </option>
+
+                        <option value="Successful">
+                            Successful
+                        </option>
+
+                        <option value="Pending">
+                            Pending
+                        </option>
+
+                        <option value="Failed">
+                            Failed
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="col-12 col-sm-6 col-lg-2">
+
+                    <label class="form-label">
+                        Delivery
+                    </label>
+
+                    <select
+                        class="form-select"
+                        id="deliveryFilter"
+                    >
+
+                        <option value="all">
+                            All Delivery
+                        </option>
+
+                        <option value="Delivered">
+                            Delivered
+                        </option>
+
+                        <option value="Processing">
+                            Processing
+                        </option>
+
+                        <option value="Failed">
+                            Failed
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="col-12 col-sm-6 col-lg-2">
+
+                    <button
+                        type="button"
+                        class="btn btn-light border w-100"
+                        id="clearFilters"
+                    >
+                        <i class="bi bi-arrow-counterclockwise me-1"></i>
+                        Clear
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- TRANSACTION TABLE -->
+
+        <div class="transactions-card">
+
+            <div class="table-header">
+
+                <h5>
+                    Customer Transactions
+                </h5>
+
+                <span
+                    class="transaction-count"
+                    id="transactionCount"
+                >
+                    Showing 8 transactions
+                </span>
+
+            </div>
+
+
+            <div class="table-responsive">
+
+                <table class="table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Transaction
+                            </th>
+
+                            <th>
+                                Customer
+                            </th>
+
+                            <th>
+                                Network
+                            </th>
+
+                            <th>
+                                Plan
+                            </th>
+
+                            <th>
+                                Amount
+                            </th>
+
+                            <th>
+                                Payment
+                            </th>
+
+                            <th>
+                                Delivery
+                            </th>
+
+                            <th>
+                                Date
+                            </th>
+
+                            <th class="text-end">
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="transactionsTableBody">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- =========================
+     TRANSACTION DETAILS MODAL
+========================= -->
+
+<div
+    class="modal fade"
+    id="transactionModal"
+    tabindex="-1"
+    aria-hidden="true"
+>
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h5 class="modal-title">
+                    Transaction Details
+                </h5>
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                ></button>
+
+            </div>
+
+            <div
+                class="modal-body"
+                id="transactionDetails"
+            >
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+></script>
+
+
+<script>
+
+/* =========================================================
+   DEMO TRANSACTIONS
+   THESE WILL LATER BE REPLACED BY PHP + MYSQL
+========================================================= */
+
+let transactions = [
+
+    {
+        id: "IDZ-20261004-001",
+        customer: "Idris Ahmad",
+        phone: "08012345678",
+        network: "MTN",
+        plan: "2GB",
+        amount: 900,
+        payment: "Successful",
+        delivery: "Delivered",
+        date: "Oct 4, 2026 10:42 AM"
+    },
+
+    {
+        id: "IDZ-20261004-002",
+        customer: "Aisha Bello",
+        phone: "08123456789",
+        network: "Airtel",
+        plan: "1GB",
+        amount: 500,
+        payment: "Successful",
+        delivery: "Delivered",
+        date: "Oct 4, 2026 10:18 AM"
+    },
+
+    {
+        id: "IDZ-20261003-003",
+        customer: "Musa Ibrahim",
+        phone: "07098765432",
+        network: "Glo",
+        plan: "5GB",
+        amount: 2000,
+        payment: "Pending",
+        delivery: "Processing",
+        date: "Oct 3, 2026 6:31 PM"
+    },
+
+    {
+        id: "IDZ-20261003-004",
+        customer: "Fatima Yusuf",
+        phone: "09011223344",
+        network: "9mobile",
+        plan: "2GB",
+        amount: 900,
+        payment: "Successful",
+        delivery: "Delivered",
+        date: "Oct 3, 2026 3:15 PM"
+    },
+
+    {
+        id: "IDZ-20261002-005",
+        customer: "Daniel Okafor",
+        phone: "08055667788",
+        network: "MTN",
+        plan: "5GB",
+        amount: 2000,
+        payment: "Failed",
+        delivery: "Failed",
+        date: "Oct 2, 2026 1:22 PM"
+    },
+
+    {
+        id: "IDZ-20261002-006",
+        customer: "Hauwa Mohammed",
+        phone: "08177889900",
+        network: "Airtel",
+        plan: "2GB",
+        amount: 900,
+        payment: "Successful",
+        delivery: "Delivered",
+        date: "Oct 2, 2026 11:40 AM"
+    },
+
+    {
+        id: "IDZ-20261001-007",
+        customer: "John Peter",
+        phone: "07033445566",
+        network: "Glo",
+        plan: "1GB",
+        amount: 500,
+        payment: "Pending",
+        delivery: "Processing",
+        date: "Oct 1, 2026 5:06 PM"
+    },
+
+    {
+        id: "IDZ-20261001-008",
+        customer: "Mary James",
+        phone: "09044556677",
+        network: "9mobile",
+        plan: "5GB",
+        amount: 2000,
+        payment: "Successful",
+        delivery: "Delivered",
+        date: "Oct 1, 2026 9:14 AM"
+    }
+
+];
+
+
+/* =========================================================
+   DOM ELEMENTS
+========================================================= */
+
+const tableBody =
+    document.getElementById("transactionsTableBody");
+
+const searchInput =
+    document.getElementById("searchTransaction");
+
+const networkFilter =
+    document.getElementById("networkFilter");
+
+const paymentFilter =
+    document.getElementById("paymentFilter");
+
+const deliveryFilter =
+    document.getElementById("deliveryFilter");
+
+const transactionCount =
+    document.getElementById("transactionCount");
+
+
+/* =========================================================
+   FORMAT MONEY
+========================================================= */
+
+function formatMoney(amount) {
+
+    return "₦" + Number(amount).toLocaleString("en-NG");
+
+}
+
+
+/* =========================================================
+   NETWORK CLASS
+========================================================= */
+
+function getNetworkClass(network) {
+
+    if (network === "MTN") {
+        return "network-mtn";
+    }
+
+    if (network === "Airtel") {
+        return "network-airtel";
+    }
+
+    if (network === "Glo") {
+        return "network-glo";
+    }
+
+    return "network-9mobile";
+
+}
+
+
+/* =========================================================
+   PAYMENT STATUS CLASS
+========================================================= */
+
+function getPaymentClass(status) {
+
+    if (status === "Successful") {
+        return "status-success";
+    }
+
+    if (status === "Pending") {
+        return "status-pending";
+    }
+
+    return "status-failed";
+
+}
+
+
+/* =========================================================
+   DELIVERY STATUS CLASS
+========================================================= */
+
+function getDeliveryClass(status) {
+
+    if (status === "Delivered") {
+        return "status-success";
+    }
+
+    if (status === "Processing") {
+        return "status-processing";
+    }
+
+    return "status-failed";
+
+}
+
+
+/* =========================================================
+   RENDER TRANSACTIONS
+========================================================= */
+
+function renderTransactions() {
+
+    const search =
+        searchInput.value
+            .toLowerCase()
+            .trim();
+
+    const network =
+        networkFilter.value;
+
+    const payment =
+        paymentFilter.value;
+
+    const delivery =
+        deliveryFilter.value;
+
+
+    const filtered =
+        transactions.filter(transaction => {
+
+            const searchableText = (
+
+                transaction.id + " " +
+                transaction.customer + " " +
+                transaction.phone + " " +
+                transaction.network + " " +
+                transaction.plan
+
+            ).toLowerCase();
+
+
+            const matchesSearch =
+                searchableText.includes(search);
+
+
+            const matchesNetwork =
+                network === "all" ||
+                transaction.network === network;
+
+
+            const matchesPayment =
+                payment === "all" ||
+                transaction.payment === payment;
+
+
+            const matchesDelivery =
+                delivery === "all" ||
+                transaction.delivery === delivery;
+
+
+            return (
+                matchesSearch &&
+                matchesNetwork &&
+                matchesPayment &&
+                matchesDelivery
+            );
+
+        });
+
+
+    tableBody.innerHTML = "";
+
+
+    if (filtered.length === 0) {
+
+        tableBody.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="9"
+                    class="text-center py-5"
+                >
+
+                    <i
+                        class="bi bi-receipt fs-2 text-muted"
+                    ></i>
+
+                    <div class="mt-2 fw-semibold">
+                        No transactions found
+                    </div>
+
+                    <div class="small text-muted">
+                        Try changing your search or filters.
+                    </div>
+
+                </td>
+
+            </tr>
+
+        `;
+
+    } else {
+
+        filtered.forEach(transaction => {
+
+            const row =
+                document.createElement("tr");
+
+
+            row.innerHTML = `
+
+                <td>
+
+                    <div class="transaction-id">
+                        ${transaction.id}
+                    </div>
+
+                </td>
+
+
+                <td>
+
+                    <div class="customer-name">
+                        ${transaction.customer}
+                    </div>
+
+                    <div class="customer-phone">
+                        ${transaction.phone}
+                    </div>
+
+                </td>
+
+
+                <td>
+
+                    <span
+                        class="network-badge ${getNetworkClass(transaction.network)}"
+                    >
+
+                        <span class="network-dot"></span>
+
+                        ${transaction.network}
+
+                    </span>
+
+                </td>
+
+
+                <td>
+
+                    <div class="plan-name">
+                        ${transaction.plan}
+                    </div>
+
+                    <div class="plan-network">
+                        Data Bundle
+                    </div>
+
+                </td>
+
+
+                <td>
+                    <strong>
+                        ${formatMoney(transaction.amount)}
+                    </strong>
+                </td>
+
+
+                <td>
+
+                    <span
+                        class="status-badge ${getPaymentClass(transaction.payment)}"
+                    >
+                        ${transaction.payment}
+                    </span>
+
+                </td>
+
+
+                <td>
+
+                    <span
+                        class="status-badge ${getDeliveryClass(transaction.delivery)}"
+                    >
+                        ${transaction.delivery}
+                    </span>
+
+                </td>
+
+
+                <td>
+                    <span class="small text-muted">
+                        ${transaction.date}
+                    </span>
+                </td>
+
+
+                <td>
+
+                    <div class="action-buttons">
+
+                        <button
+                            class="action-btn"
+                            title="View transaction"
+                            onclick="viewTransaction('${transaction.id}')"
+                        >
+
+                            <i class="bi bi-eye"></i>
+
+                        </button>
+
+                    </div>
+
+                </td>
+
+            `;
+
+
+            tableBody.appendChild(row);
+
+        });
+
+    }
+
+
+    transactionCount.textContent =
+        `Showing ${filtered.length} ${
+            filtered.length === 1
+                ? "transaction"
+                : "transactions"
+        }`;
+
+
+    updateStats();
+
+}
+
+
+/* =========================================================
+   UPDATE STATS
+========================================================= */
+
+function updateStats() {
+
+    const successful =
+        transactions.filter(
+            item => item.payment === "Successful"
+        );
+
+    const pending =
+        transactions.filter(
+            item => item.payment === "Pending"
+        );
+
+
+    const revenue =
+        successful.reduce(
+            (total, item) =>
+                total + Number(item.amount),
+            0
+        );
+
+
+    document.getElementById(
+        "totalTransactions"
+    ).textContent =
+        transactions.length;
+
+
+    document.getElementById(
+        "successfulTransactions"
+    ).textContent =
+        successful.length;
+
+
+    document.getElementById(
+        "pendingTransactions"
+    ).textContent =
+        pending.length;
+
+
+    document.getElementById(
+        "totalRevenue"
+    ).textContent =
+        formatMoney(revenue);
+
+}
+
+
+/* =========================================================
+   VIEW TRANSACTION
+========================================================= */
+
+function viewTransaction(id) {
+
+    const transaction =
+        transactions.find(
+            item => item.id === id
+        );
+
+
+    if (!transaction) {
+        return;
+    }
+
+
+    document.getElementById(
+        "transactionDetails"
+    ).innerHTML = `
+
+        <div class="detail-row">
+
+            <span class="detail-label">
+                Transaction ID
+            </span>
+
+            <span class="detail-value">
+                ${transaction.id}
+            </span>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <span class="detail-label">
+                Customer
+            </span>
+
+            <span class="detail-value">
+                ${transaction.customer}
+            </span>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <span class="detail-label">
+                Phone Number
+            </span>
+
+            <span class="detail-value">
+                ${transaction.phone}
+            </span>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <span class="detail-label">
+                Network
+            </span>
+
+            <span class="detail-value">
+                ${transaction.network}
+            </span>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <span class="detail-label">
+                Data Plan
+            </span>
+
+            <span class="detail-value">
+                ${transaction.plan}
+            </span>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <span class="detail-label">
+                Amount
+            </span>
+
+            <span class="detail-value">
+                ${formatMoney(transaction.amount)}
+            </span>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <span class="detail-label">
+                Payment
+            </span>
+
+            <span class="detail-value">
+
+                <span class="status-badge ${getPaymentClass(transaction.payment)}">
+                    ${transaction.payment}
+                </span>
+
+            </span>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <span class="detail-label">
+                Data Delivery
+            </span>
+
+            <span class="detail-value">
+
+                <span class="status-badge ${getDeliveryClass(transaction.delivery)}">
+                    ${transaction.delivery}
+                </span>
+
+            </span>
+
+        </div>
+
+
+        <div class="detail-row">
+
+            <span class="detail-label">
+                Date
+            </span>
+
+            <span class="detail-value">
+                ${transaction.date}
+            </span>
+
+        </div>
+
+    `;
+
+
+    const modal =
+        new bootstrap.Modal(
+            document.getElementById(
+                "transactionModal"
+            )
+        );
+
+
+    modal.show();
+
+}
+
+
+/* =========================================================
+   FILTER EVENTS
+========================================================= */
+
+searchInput.addEventListener(
+    "input",
+    renderTransactions
+);
+
+networkFilter.addEventListener(
+    "change",
+    renderTransactions
+);
+
+paymentFilter.addEventListener(
+    "change",
+    renderTransactions
+);
+
+deliveryFilter.addEventListener(
+    "change",
+    renderTransactions
+);
+
+
+/* =========================================================
+   CLEAR FILTERS
+========================================================= */
+
+document
+    .getElementById("clearFilters")
+    .addEventListener(
+        "click",
+        function () {
+
+            searchInput.value = "";
+
+            networkFilter.value = "all";
+
+            paymentFilter.value = "all";
+
+            deliveryFilter.value = "all";
+
+            renderTransactions();
+
+        }
+    );
+
+
+/* =========================================================
+   MOBILE SIDEBAR
+========================================================= */
+
+document
+    .getElementById("mobileMenuBtn")
+    .addEventListener(
+        "click",
+        function () {
+
+            document
+                .getElementById("adminSidebar")
+                .classList.toggle("show");
+
+        }
+    );
+
+
+/* =========================================================
+   INITIAL LOAD
+========================================================= */
+
+renderTransactions();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Contact Us | IDIZA</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Bootstrap Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+    <!-- Google Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- IDIZA Main CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <style>
+        /* =========================================
+           CONTACT PAGE
+        ========================================== */
+
+        .contact-page {
+            background: #f6f8fb;
+            min-height: 100vh;
+        }
+
+        /* Hero */
+        .contact-hero {
+            background: linear-gradient(
+                135deg,
+                #081b33,
+                #102c4d
+            );
+            color: #fff;
+            padding: 85px 0 105px;
+        }
+
+        .contact-hero h1 {
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 18px;
+        }
+
+        .contact-hero p {
+            max-width: 680px;
+            margin: auto;
+            color: rgba(255,255,255,0.75);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        /* Contact Main */
+        .contact-main {
+            padding: 80px 0;
+        }
+
+        .contact-card {
+            background: #fff;
+            border: 1px solid #e4e8ef;
+            border-radius: 18px;
+            padding: 30px;
+            height: 100%;
+            box-shadow: 0 12px 35px rgba(8,27,51,0.05);
+        }
+
+        .contact-card h2 {
+            color: #081b33;
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .contact-card > p {
+            color: #667085;
+            line-height: 1.7;
+        }
+
+        /* Contact Information */
+        .contact-info {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 18px 0;
+            border-bottom: 1px solid #edf0f4;
+        }
+
+        .contact-info:last-child {
+            border-bottom: none;
+        }
+
+        .contact-icon {
+            width: 46px;
+            height: 46px;
+            flex-shrink: 0;
+            border-radius: 12px;
+            background: rgba(22,119,255,0.1);
+            color: #1677ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .contact-info h5 {
+            color: #081b33;
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .contact-info p {
+            color: #667085;
+            margin: 0;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .contact-info a {
+            color: #667085;
+            text-decoration: none;
+        }
+
+        .contact-info a:hover {
+            color: #1677ff;
+        }
+
+        /* Form */
+        .form-label {
+            color: #172033;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .form-control,
+        .form-select {
+            min-height: 48px;
+            border: 1px solid #dfe4eb;
+            border-radius: 10px;
+            color: #172033;
+        }
+
+        textarea.form-control {
+            min-height: 140px;
+            resize: vertical;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: #1677ff;
+            box-shadow: 0 0 0 3px rgba(22,119,255,0.1);
+        }
+
+        .btn-send {
+            width: 100%;
+            padding: 13px 20px;
+            border: none;
+            border-radius: 10px;
+            background: #1677ff;
+            color: #fff;
+            font-weight: 700;
+            transition: 0.2s ease;
+        }
+
+        .btn-send:hover {
+            background: #0d63d7;
+            transform: translateY(-1px);
+        }
+
+        /* FAQ */
+        .faq-section {
+            background: #fff;
+            padding: 85px 0;
+        }
+
+        .section-heading {
+            margin-bottom: 45px;
+        }
+
+        .section-heading h2 {
+            color: #081b33;
+            font-size: 2.1rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .section-heading p {
+            color: #667085;
+            max-width: 650px;
+            margin: auto;
+        }
+
+        .accordion-item {
+            border: 1px solid #e4e8ef !important;
+            margin-bottom: 12px;
+            border-radius: 12px !important;
+            overflow: hidden;
+        }
+
+        .accordion-button {
+            font-weight: 600;
+            color: #081b33;
+            background: #fff;
+            padding: 18px 20px;
+        }
+
+        .accordion-button:not(.collapsed) {
+            color: #1677ff;
+            background: #f8fbff;
+            box-shadow: none;
+        }
+
+        .accordion-button:focus {
+            box-shadow: none;
+        }
+
+        .accordion-body {
+            color: #667085;
+            line-height: 1.7;
+        }
+
+        /* CTA */
+        .contact-cta {
+            background: #081b33;
+            padding: 75px 0;
+        }
+
+        .contact-cta h2 {
+            color: #fff;
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .contact-cta p {
+            color: rgba(255,255,255,0.7);
+            max-width: 600px;
+            margin: 0 auto 25px;
+            line-height: 1.7;
+        }
+
+        .btn-cta {
+            display: inline-block;
+            background: #1677ff;
+            color: #fff;
+            padding: 13px 25px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: 0.2s ease;
+        }
+
+        .btn-cta:hover {
+            background: #0d63d7;
+            color: #fff;
+        }
+
+        /* Mobile */
+        @media (max-width: 767px) {
+
+            .contact-hero {
+                padding: 65px 0 85px;
+            }
+
+            .contact-main,
+            .faq-section {
+                padding: 60px 0;
+            }
+
+            .contact-card {
+                padding: 22px;
+            }
+
+            .contact-cta {
+                padding: 60px 0;
+            }
+        }
+    </style>
+</head>
+
+<body class="contact-page">
+
+    <!-- =========================================
+         NAVBAR
+    ========================================== -->
+    <nav class="navbar navbar-expand-lg navbar-dark idiza-navbar sticky-top">
+
+        <div class="container">
+
+            <!-- Logo -->
+            <a class="navbar-brand fw-bold" href="index.html">
+                <span class="brand-logo">IDIZA</span>
+            </a>
+
+            <!-- Mobile Menu -->
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#mainNavbar"
+                aria-controls="mainNavbar"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navigation -->
+            <div
+                class="collapse navbar-collapse"
+                id="mainNavbar"
+            >
+
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+
+                    <li class="nav-item">
+                        <a
+                            class="nav-link"
+                            href="index.html"
+                        >
+                            Home
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a
+                            class="nav-link"
+                            href="data-plans.html"
+                        >
+                            Data Plans
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a
+                            class="nav-link"
+                            href="about.html"
+                        >
+                            About
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a
+                            class="nav-link active"
+                            href="contact.html"
+                        >
+                            Contact
+                        </a>
+                    </li>
+
+                </ul>
+
+                <div class="d-flex gap-2">
+
+                    <a
+                        href="login.html"
+                        class="btn btn-outline-light btn-sm px-3"
+                    >
+                        Login
+                    </a>
+
+                    <a
+                        href="register.html"
+                        class="btn btn-primary btn-sm px-3"
+                    >
+                        Create Account
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =========================================
+         HERO
+    ========================================== -->
+    <section class="contact-hero text-center">
+
+        <div class="container">
+
+            <span class="badge bg-primary px-3 py-2 mb-3">
+                We're Here to Help
+            </span>
+
+            <h1>
+                Contact IDIZA
+            </h1>
+
+            <p>
+                Have a question, need help with a transaction, or want
+                to learn more about IDIZA? Send us a message and our
+                support team will be ready to assist you.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         CONTACT SECTION
+    ========================================== -->
+    <section class="contact-main">
+
+        <div class="container">
+
+            <div class="row g-4">
+
+                <!-- Contact Information -->
+                <div class="col-lg-5">
+
+                    <div class="contact-card">
+
+                        <h2>
+                            Get in Touch
+                        </h2>
+
+                        <p>
+                            You can contact us using any of the channels
+                            below. We are working to make customer
+                            support simple and accessible.
+                        </p>
+
+
+                        <!-- Email -->
+                        <div class="contact-info">
+
+                            <div class="contact-icon">
+                                <i class="bi bi-envelope"></i>
+                            </div>
+
+                            <div>
+
+                                <h5>
+                                    Email
+                                </h5>
+
+                                <p>
+                                    <a href="mailto:support@idiza.com">
+                                        support@idiza.com
+                                    </a>
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Phone -->
+                        <div class="contact-info">
+
+                            <div class="contact-icon">
+                                <i class="bi bi-telephone"></i>
+                            </div>
+
+                            <div>
+
+                                <h5>
+                                    Phone
+                                </h5>
+
+                                <p>
+                                    <a href="tel:+2348000000000">
+                                        +234 800 000 0000
+                                    </a>
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Location -->
+                        <div class="contact-info">
+
+                            <div class="contact-icon">
+                                <i class="bi bi-geo-alt"></i>
+                            </div>
+
+                            <div>
+
+                                <h5>
+                                    Location
+                                </h5>
+
+                                <p>
+                                    Nigeria
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Support Hours -->
+                        <div class="contact-info">
+
+                            <div class="contact-icon">
+                                <i class="bi bi-clock"></i>
+                            </div>
+
+                            <div>
+
+                                <h5>
+                                    Support Hours
+                                </h5>
+
+                                <p>
+                                    Monday - Saturday<br>
+                                    8:00 AM - 6:00 PM
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Social -->
+                        <div class="mt-4">
+
+                            <h5 class="fw-bold mb-3">
+                                Follow Us
+                            </h5>
+
+                            <div class="d-flex gap-2">
+
+                                <a
+                                    href="#"
+                                    class="btn btn-light border"
+                                    aria-label="Facebook"
+                                >
+                                    <i class="bi bi-facebook"></i>
+                                </a>
+
+                                <a
+                                    href="#"
+                                    class="btn btn-light border"
+                                    aria-label="Instagram"
+                                >
+                                    <i class="bi bi-instagram"></i>
+                                </a>
+
+                                <a
+                                    href="#"
+                                    class="btn btn-light border"
+                                    aria-label="Twitter"
+                                >
+                                    <i class="bi bi-twitter-x"></i>
+                                </a>
+
+                                <a
+                                    href="#"
+                                    class="btn btn-light border"
+                                    aria-label="WhatsApp"
+                                >
+                                    <i class="bi bi-whatsapp"></i>
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Contact Form -->
+                <div class="col-lg-7">
+
+                    <div class="contact-card">
+
+                        <h2>
+                            Send Us a Message
+                        </h2>
+
+                        <p class="mb-4">
+                            Fill in the form below and tell us how we
+                            can help you.
+                        </p>
+
+
+                        <form id="contactForm">
+
+                            <div class="row g-3">
+
+                                <!-- Name -->
+                                <div class="col-md-6">
+
+                                    <label
+                                        for="fullName"
+                                        class="form-label"
+                                    >
+                                        Full Name
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="fullName"
+                                        placeholder="Enter your full name"
+                                        required
+                                    >
+
+                                </div>
+
+
+                                <!-- Email -->
+                                <div class="col-md-6">
+
+                                    <label
+                                        for="email"
+                                        class="form-label"
+                                    >
+                                        Email Address
+                                    </label>
+
+                                    <input
+                                        type="email"
+                                        class="form-control"
+                                        id="email"
+                                        placeholder="you@example.com"
+                                        required
+                                    >
+
+                                </div>
+
+
+                                <!-- Phone -->
+                                <div class="col-md-6">
+
+                                    <label
+                                        for="phone"
+                                        class="form-label"
+                                    >
+                                        Phone Number
+                                    </label>
+
+                                    <input
+                                        type="tel"
+                                        class="form-control"
+                                        id="phone"
+                                        placeholder="08012345678"
+                                    >
+
+                                </div>
+
+
+                                <!-- Subject -->
+                                <div class="col-md-6">
+
+                                    <label
+                                        for="subject"
+                                        class="form-label"
+                                    >
+                                        Subject
+                                    </label>
+
+                                    <select
+                                        class="form-select"
+                                        id="subject"
+                                        required
+                                    >
+
+                                        <option value="">
+                                            Select a subject
+                                        </option>
+
+                                        <option value="data">
+                                            Data Purchase
+                                        </option>
+
+                                        <option value="payment">
+                                            Payment Issue
+                                        </option>
+
+                                        <option value="account">
+                                            Account Issue
+                                        </option>
+
+                                        <option value="transaction">
+                                            Transaction Issue
+                                        </option>
+
+                                        <option value="general">
+                                            General Inquiry
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+
+                                <!-- Message -->
+                                <div class="col-12">
+
+                                    <label
+                                        for="message"
+                                        class="form-label"
+                                    >
+                                        Message
+                                    </label>
+
+                                    <textarea
+                                        class="form-control"
+                                        id="message"
+                                        placeholder="Write your message here..."
+                                        required
+                                    ></textarea>
+
+                                </div>
+
+
+                                <!-- Checkbox -->
+                                <div class="col-12">
+
+                                    <div class="form-check">
+
+                                        <input
+                                            class="form-check-input"
+                                            type="checkbox"
+                                            id="agree"
+                                            required
+                                        >
+
+                                        <label
+                                            class="form-check-label text-muted"
+                                            for="agree"
+                                        >
+                                            I agree that IDIZA may contact
+                                            me regarding this request.
+                                        </label>
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- Submit -->
+                                <div class="col-12">
+
+                                    <button
+                                        type="submit"
+                                        class="btn-send"
+                                    >
+                                        <i class="bi bi-send me-2"></i>
+                                        Send Message
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </form>
+
+
+                        <!-- Success Message -->
+                        <div
+                            id="successMessage"
+                            class="alert alert-success mt-4 d-none"
+                        >
+                            <i class="bi bi-check-circle-fill me-2"></i>
+                            Thank you! Your message has been received.
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         FAQ
+    ========================================== -->
+    <section class="faq-section">
+
+        <div class="container">
+
+            <div class="section-heading text-center">
+
+                <span class="text-primary fw-bold">
+                    FAQ
+                </span>
+
+                <h2>
+                    Frequently Asked Questions
+                </h2>
+
+                <p>
+                    Here are some common questions about using IDIZA.
+                </p>
+
+            </div>
+
+
+            <div
+                class="accordion"
+                id="faqAccordion"
+            >
+
+                <!-- FAQ 1 -->
+                <div class="accordion-item">
+
+                    <h2 class="accordion-header">
+
+                        <button
+                            class="accordion-button"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#faqOne"
+                            aria-expanded="true"
+                        >
+                            How do I buy data on IDIZA?
+                        </button>
+
+                    </h2>
+
+                    <div
+                        id="faqOne"
+                        class="accordion-collapse collapse show"
+                        data-bs-parent="#faqAccordion"
+                    >
+
+                        <div class="accordion-body">
+                            Choose a network from our Data Plans page,
+                            select your preferred data plan, enter the
+                            recipient's phone number, and proceed with
+                            payment.
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FAQ 2 -->
+                <div class="accordion-item">
+
+                    <h2 class="accordion-header">
+
+                        <button
+                            class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#faqTwo"
+                        >
+                            Which networks are supported?
+                        </button>
+
+                    </h2>
+
+                    <div
+                        id="faqTwo"
+                        class="accordion-collapse collapse"
+                        data-bs-parent="#faqAccordion"
+                    >
+
+                        <div class="accordion-body">
+                            IDIZA is being designed to support major
+                            Nigerian mobile networks including MTN,
+                            Airtel, Glo, and 9mobile.
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FAQ 3 -->
+                <div class="accordion-item">
+
+                    <h2 class="accordion-header">
+
+                        <button
+                            class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#faqThree"
+                        >
+                            What happens if my payment fails?
+                        </button>
+
+                    </h2>
+
+                    <div
+                        id="faqThree"
+                        class="accordion-collapse collapse"
+                        data-bs-parent="#faqAccordion"
+                    >
+
+                        <div class="accordion-body">
+                            A failed payment should not result in a
+                            completed data purchase. Once the backend is
+                            connected, transaction status and payment
+                            verification will be handled automatically.
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FAQ 4 -->
+                <div class="accordion-item">
+
+                    <h2 class="accordion-header">
+
+                        <button
+                            class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#faqFour"
+                        >
+                            Can I check my previous transactions?
+                        </button>
+
+                    </h2>
+
+                    <div
+                        id="faqFour"
+                        class="accordion-collapse collapse"
+                        data-bs-parent="#faqAccordion"
+                    >
+
+                        <div class="accordion-body">
+                            Yes. Once the user account system is connected
+                            to the PHP and MySQL backend, customers will
+                            be able to view their transaction history from
+                            their dashboard.
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FAQ 5 -->
+                <div class="accordion-item">
+
+                    <h2 class="accordion-header">
+
+                        <button
+                            class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#faqFive"
+                        >
+                            Do I need an account to use IDIZA?
+                        </button>
+
+                    </h2>
+
+                    <div
+                        id="faqFive"
+                        class="accordion-collapse collapse"
+                        data-bs-parent="#faqAccordion"
+                    >
+
+                        <div class="accordion-body">
+                            IDIZA will support customer accounts so users
+                            can securely manage their purchases,
+                            transactions, profile information, and other
+                            account features.
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         CTA
+    ========================================== -->
+    <section class="contact-cta">
+
+        <div class="container text-center">
+
+            <h2>
+                Need Mobile Data?
+            </h2>
+
+            <p>
+                Browse our available plans and stay connected with IDIZA.
+            </p>
+
+            <a
+                href="data-plans.html"
+                class="btn-cta"
+            >
+                View Data Plans
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         FOOTER
+    ========================================== -->
+    <footer class="idiza-footer">
+
+        <div class="container">
+
+            <div class="row g-4">
+
+                <!-- Brand -->
+                <div class="col-lg-4">
+
+                    <h4 class="fw-bold text-white">
+                        IDIZA
+                    </h4>
+
+                    <p>
+                        Affordable and reliable mobile data services
+                        built to keep you connected.
+                    </p>
+
+                </div>
+
+
+                <!-- Company -->
+                <div class="col-6 col-lg-2">
+
+                    <h6 class="text-white">
+                        Company
+                    </h6>
+
+                    <ul class="list-unstyled">
+
+                        <li>
+                            <a href="about.html">
+                                About
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="contact.html">
+                                Contact
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <!-- Services -->
+                <div class="col-6 col-lg-2">
+
+                    <h6 class="text-white">
+                        Services
+                    </h6>
+
+                    <ul class="list-unstyled">
+
+                        <li>
+                            <a href="data-plans.html">
+                                Data Plans
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="buy-data.html">
+                                Buy Data
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <!-- Account -->
+                <div class="col-6 col-lg-2">
+
+                    <h6 class="text-white">
+                        Account
+                    </h6>
+
+                    <ul class="list-unstyled">
+
+                        <li>
+                            <a href="login.html">
+                                Login
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="register.html">
+                                Register
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <!-- Support -->
+                <div class="col-6 col-lg-2">
+
+                    <h6 class="text-white">
+                        Support
+                    </h6>
+
+                    <ul class="list-unstyled">
+
+                        <li>
+                            <a href="contact.html">
+                                Help Center
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="contact.html">
+                                Contact Us
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+            <hr>
+
+
+            <div class="footer-bottom">
+
+                <p class="mb-0">
+                    © 2026 IDIZA. All rights reserved.
+                </p>
+
+                <div class="d-flex gap-3">
+
+                    <a href="#">
+                        <i class="bi bi-facebook"></i>
+                    </a>
+
+                    <a href="#">
+                        <i class="bi bi-instagram"></i>
+                    </a>
+
+                    <a href="#">
+                        <i class="bi bi-twitter-x"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- Bootstrap JS -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    ></script>
+
+
+    <!-- =========================================
+         CONTACT FORM JAVASCRIPT
+    ========================================== -->
+    <script>
+
+        const contactForm =
+            document.getElementById("contactForm");
+
+        const successMessage =
+            document.getElementById("successMessage");
+
+
+        contactForm.addEventListener(
+            "submit",
+            function(event) {
+
+                event.preventDefault();
+
+                successMessage.classList.remove("d-none");
+
+                contactForm.reset();
+
+                successMessage.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center"
+                });
+
+            }
+        );
+
+    </script>
+
+</body>
+</html>

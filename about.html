@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>About Us | IDIZA</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Bootstrap Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+    <!-- Google Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- IDIZA Main CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <style>
+        /* =========================================
+           ABOUT PAGE
+        ========================================= */
+
+        .about-page {
+            background: #f6f8fb;
+            min-height: 100vh;
+        }
+
+        /* Hero */
+        .about-hero {
+            background:
+                linear-gradient(
+                    135deg,
+                    #081b33 0%,
+                    #102c4d 100%
+                );
+            padding: 90px 0 110px;
+            color: #fff;
+        }
+
+        .about-hero h1 {
+            font-size: clamp(2.2rem, 5vw, 3.6rem);
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .about-hero p {
+            max-width: 700px;
+            margin: 0 auto;
+            color: rgba(255, 255, 255, 0.76);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        /* Main About Section */
+        .about-main {
+            padding: 90px 0;
+        }
+
+        .about-content h2 {
+            color: #081b33;
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .about-content p {
+            color: #667085;
+            line-height: 1.8;
+            margin-bottom: 18px;
+        }
+
+        .about-image-box {
+            background:
+                linear-gradient(
+                    135deg,
+                    #102c4d,
+                    #1677ff
+                );
+            min-height: 380px;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(8, 27, 51, 0.12);
+        }
+
+        .about-image-box::before {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 50%;
+        }
+
+        .about-image-box::after {
+            content: "";
+            position: absolute;
+            width: 450px;
+            height: 450px;
+            border: 1px solid rgba(255,255,255,0.10);
+            border-radius: 50%;
+        }
+
+        .about-logo {
+            position: relative;
+            z-index: 2;
+            color: #fff;
+            font-size: 4rem;
+            font-weight: 800;
+            letter-spacing: 4px;
+        }
+
+        /* Mission / Vision */
+        .mission-section {
+            padding: 80px 0;
+            background: #fff;
+        }
+
+        .section-heading {
+            margin-bottom: 45px;
+        }
+
+        .section-heading h2 {
+            color: #081b33;
+            font-size: 2.1rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .section-heading p {
+            color: #667085;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        .info-card {
+            height: 100%;
+            padding: 32px;
+            background: #f6f8fb;
+            border: 1px solid #e4e8ef;
+            border-radius: 18px;
+            transition: all 0.25s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(8, 27, 51, 0.08);
+            border-color: rgba(22, 119, 255, 0.25);
+        }
+
+        .info-icon {
+            width: 58px;
+            height: 58px;
+            background: rgba(22, 119, 255, 0.1);
+            color: #1677ff;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 22px;
+        }
+
+        .info-card h3 {
+            color: #081b33;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+
+        .info-card p {
+            color: #667085;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        /* Values */
+        .values-section {
+            padding: 90px 0;
+            background: #f6f8fb;
+        }
+
+        .value-card {
+            background: #fff;
+            border: 1px solid #e4e8ef;
+            border-radius: 18px;
+            padding: 28px;
+            height: 100%;
+            transition: all 0.25s ease;
+        }
+
+        .value-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(8, 27, 51, 0.07);
+        }
+
+        .value-number {
+            color: #1677ff;
+            font-size: 0.85rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .value-card h4 {
+            color: #081b33;
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .value-card p {
+            color: #667085;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        /* How It Works */
+        .how-section {
+            background: #fff;
+            padding: 90px 0;
+        }
+
+        .step-card {
+            text-align: center;
+            padding: 25px;
+            height: 100%;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background: #1677ff;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 800;
+        }
+
+        .step-card h4 {
+            color: #081b33;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .step-card p {
+            color: #667085;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        /* CTA */
+        .about-cta {
+            padding: 80px 0;
+            background: #081b33;
+        }
+
+        .about-cta h2 {
+            color: #fff;
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .about-cta p {
+            color: rgba(255,255,255,0.7);
+            max-width: 600px;
+            margin: 0 auto 28px;
+            line-height: 1.7;
+        }
+
+        .btn-about-primary {
+            display: inline-block;
+            padding: 13px 25px;
+            background: #1677ff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 700;
+            transition: 0.2s ease;
+        }
+
+        .btn-about-primary:hover {
+            background: #0d63d7;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .btn-about-outline {
+            display: inline-block;
+            padding: 12px 24px;
+            border: 1px solid rgba(255,255,255,0.3);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 700;
+            transition: 0.2s ease;
+        }
+
+        .btn-about-outline:hover {
+            background: #fff;
+            color: #081b33;
+        }
+
+        /* Mobile */
+        @media (max-width: 767px) {
+
+            .about-hero {
+                padding: 65px 0 85px;
+            }
+
+            .about-main,
+            .mission-section,
+            .values-section,
+            .how-section {
+                padding: 60px 0;
+            }
+
+            .about-image-box {
+                min-height: 280px;
+            }
+
+            .about-logo {
+                font-size: 3rem;
+            }
+
+            .about-cta {
+                padding: 60px 0;
+            }
+        }
+    </style>
+</head>
+
+<body class="about-page">
+
+    <!-- =========================================
+         NAVBAR
+    ========================================== -->
+    <nav class="navbar navbar-expand-lg navbar-dark idiza-navbar sticky-top">
+
+        <div class="container">
+
+            <!-- Logo -->
+            <a class="navbar-brand fw-bold" href="index.html">
+                <span class="brand-logo">IDIZA</span>
+            </a>
+
+            <!-- Mobile Menu -->
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#mainNavbar"
+                aria-controls="mainNavbar"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navigation -->
+            <div
+                class="collapse navbar-collapse"
+                id="mainNavbar"
+            >
+
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+
+                    <li class="nav-item">
+                        <a
+                            class="nav-link"
+                            href="index.html"
+                        >
+                            Home
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a
+                            class="nav-link"
+                            href="data-plans.html"
+                        >
+                            Data Plans
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a
+                            class="nav-link active"
+                            href="about.html"
+                        >
+                            About
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a
+                            class="nav-link"
+                            href="contact.html"
+                        >
+                            Contact
+                        </a>
+                    </li>
+
+                </ul>
+
+                <div class="d-flex gap-2">
+
+                    <a
+                        href="login.html"
+                        class="btn btn-outline-light btn-sm px-3"
+                    >
+                        Login
+                    </a>
+
+                    <a
+                        href="register.html"
+                        class="btn btn-primary btn-sm px-3"
+                    >
+                        Create Account
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =========================================
+         HERO
+    ========================================== -->
+    <section class="about-hero text-center">
+
+        <div class="container">
+
+            <span class="badge bg-primary px-3 py-2 mb-3">
+                About IDIZA
+            </span>
+
+            <h1>
+                Making Connectivity Simple
+            </h1>
+
+            <p>
+                IDIZA is a digital platform designed to make buying
+                mobile data simple, convenient, reliable, and accessible.
+                Our goal is to help people stay connected without
+                unnecessary complications.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         ABOUT IDIZA
+    ========================================== -->
+    <section class="about-main">
+
+        <div class="container">
+
+            <div class="row align-items-center g-5">
+
+                <!-- Content -->
+                <div class="col-lg-6">
+
+                    <div class="about-content">
+
+                        <span class="text-primary fw-bold">
+                            WHO WE ARE
+                        </span>
+
+                        <h2>
+                            Welcome to IDIZA
+                        </h2>
+
+                        <p>
+                            IDIZA is a Nigerian digital platform focused
+                            on providing convenient access to mobile data
+                            services.
+                        </p>
+
+                        <p>
+                            We are building IDIZA to give customers a
+                            simple way to select their preferred network,
+                            choose a data plan, make a secure payment,
+                            and receive their data without unnecessary
+                            steps.
+                        </p>
+
+                        <p>
+                            Our platform is designed with simplicity,
+                            reliability, security, and customer experience
+                            at the center of everything we do.
+                        </p>
+
+                        <a
+                            href="data-plans.html"
+                            class="btn btn-primary mt-2 px-4 py-2"
+                        >
+                            Explore Data Plans
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Visual -->
+                <div class="col-lg-6">
+
+                    <div class="about-image-box">
+
+                        <div class="about-logo">
+                            IDIZA
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         MISSION & VISION
+    ========================================== -->
+    <section class="mission-section">
+
+        <div class="container">
+
+            <div class="section-heading text-center">
+
+                <span class="text-primary fw-bold">
+                    WHAT DRIVES US
+                </span>
+
+                <h2>
+                    Our Mission & Vision
+                </h2>
+
+                <p>
+                    We are building a platform that puts convenience,
+                    trust, and accessibility first.
+                </p>
+
+            </div>
+
+
+            <div class="row g-4">
+
+                <!-- Mission -->
+                <div class="col-md-6">
+
+                    <div class="info-card">
+
+                        <div class="info-icon">
+                            <i class="bi bi-bullseye"></i>
+                        </div>
+
+                        <h3>
+                            Our Mission
+                        </h3>
+
+                        <p>
+                            To provide a simple and dependable platform
+                            where customers can conveniently purchase
+                            mobile data and manage their transactions
+                            from one place.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Vision -->
+                <div class="col-md-6">
+
+                    <div class="info-card">
+
+                        <div class="info-icon">
+                            <i class="bi bi-eye"></i>
+                        </div>
+
+                        <h3>
+                            Our Vision
+                        </h3>
+
+                        <p>
+                            To build a trusted digital service platform
+                            that makes everyday connectivity easier for
+                            individuals and businesses across Nigeria.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         OUR VALUES
+    ========================================== -->
+    <section class="values-section">
+
+        <div class="container">
+
+            <div class="section-heading text-center">
+
+                <span class="text-primary fw-bold">
+                    OUR VALUES
+                </span>
+
+                <h2>
+                    What We Stand For
+                </h2>
+
+                <p>
+                    These principles guide the way we build and improve
+                    IDIZA.
+                </p>
+
+            </div>
+
+
+            <div class="row g-4">
+
+                <!-- Value 1 -->
+                <div class="col-md-6 col-lg-3">
+
+                    <div class="value-card">
+
+                        <div class="value-number">
+                            01
+                        </div>
+
+                        <h4>
+                            Simplicity
+                        </h4>
+
+                        <p>
+                            We keep the buying process straightforward
+                            and easy to understand.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Value 2 -->
+                <div class="col-md-6 col-lg-3">
+
+                    <div class="value-card">
+
+                        <div class="value-number">
+                            02
+                        </div>
+
+                        <h4>
+                            Reliability
+                        </h4>
+
+                        <p>
+                            We aim to provide dependable services and
+                            consistent customer experiences.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Value 3 -->
+                <div class="col-md-6 col-lg-3">
+
+                    <div class="value-card">
+
+                        <div class="value-number">
+                            03
+                        </div>
+
+                        <h4>
+                            Security
+                        </h4>
+
+                        <p>
+                            Customer information and transactions are
+                            treated with security as a priority.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Value 4 -->
+                <div class="col-md-6 col-lg-3">
+
+                    <div class="value-card">
+
+                        <div class="value-number">
+                            04
+                        </div>
+
+                        <h4>
+                            Customer First
+                        </h4>
+
+                        <p>
+                            We design our services around the needs of
+                            the people who use them.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         HOW IT WORKS
+    ========================================== -->
+    <section class="how-section">
+
+        <div class="container">
+
+            <div class="section-heading text-center">
+
+                <span class="text-primary fw-bold">
+                    HOW IDIZA WORKS
+                </span>
+
+                <h2>
+                    Get Connected in Three Steps
+                </h2>
+
+                <p>
+                    Buying data through IDIZA is designed to be quick
+                    and straightforward.
+                </p>
+
+            </div>
+
+
+            <div class="row g-4">
+
+                <!-- Step 1 -->
+                <div class="col-md-4">
+
+                    <div class="step-card">
+
+                        <div class="step-number">
+                            1
+                        </div>
+
+                        <h4>
+                            Choose a Plan
+                        </h4>
+
+                        <p>
+                            Select your network and choose the data
+                            package that suits your needs.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Step 2 -->
+                <div class="col-md-4">
+
+                    <div class="step-card">
+
+                        <div class="step-number">
+                            2
+                        </div>
+
+                        <h4>
+                            Make Payment
+                        </h4>
+
+                        <p>
+                            Enter your details and complete your payment
+                            through the available payment method.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Step 3 -->
+                <div class="col-md-4">
+
+                    <div class="step-card">
+
+                        <div class="step-number">
+                            3
+                        </div>
+
+                        <h4>
+                            Receive Your Data
+                        </h4>
+
+                        <p>
+                            Your data will be delivered to the selected
+                            phone number after successful processing.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         CTA
+    ========================================== -->
+    <section class="about-cta">
+
+        <div class="container text-center">
+
+            <h2>
+                Ready to Stay Connected?
+            </h2>
+
+            <p>
+                Explore our available data plans and choose the package
+                that works best for you.
+            </p>
+
+            <div class="d-flex justify-content-center gap-3 flex-wrap">
+
+                <a
+                    href="data-plans.html"
+                    class="btn-about-primary"
+                >
+                    View Data Plans
+                </a>
+
+                <a
+                    href="register.html"
+                    class="btn-about-outline"
+                >
+                    Create Account
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         FOOTER
+    ========================================== -->
+    <footer class="idiza-footer">
+
+        <div class="container">
+
+            <div class="row g-4">
+
+                <!-- Brand -->
+                <div class="col-lg-4">
+
+                    <h4 class="fw-bold text-white">
+                        IDIZA
+                    </h4>
+
+                    <p>
+                        Affordable and reliable mobile data services
+                        built to keep you connected.
+                    </p>
+
+                </div>
+
+
+                <!-- Company -->
+                <div class="col-6 col-lg-2">
+
+                    <h6 class="text-white">
+                        Company
+                    </h6>
+
+                    <ul class="list-unstyled">
+
+                        <li>
+                            <a href="about.html">
+                                About
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="contact.html">
+                                Contact
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <!-- Services -->
+                <div class="col-6 col-lg-2">
+
+                    <h6 class="text-white">
+                        Services
+                    </h6>
+
+                    <ul class="list-unstyled">
+
+                        <li>
+                            <a href="data-plans.html">
+                                Data Plans
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="buy-data.html">
+                                Buy Data
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <!-- Account -->
+                <div class="col-6 col-lg-2">
+
+                    <h6 class="text-white">
+                        Account
+                    </h6>
+
+                    <ul class="list-unstyled">
+
+                        <li>
+                            <a href="login.html">
+                                Login
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="register.html">
+                                Register
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <!-- Support -->
+                <div class="col-6 col-lg-2">
+
+                    <h6 class="text-white">
+                        Support
+                    </h6>
+
+                    <ul class="list-unstyled">
+
+                        <li>
+                            <a href="contact.html">
+                                Help Center
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="contact.html">
+                                Contact Us
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+            <hr>
+
+
+            <div class="footer-bottom">
+
+                <p class="mb-0">
+                    © 2026 IDIZA. All rights reserved.
+                </p>
+
+                <div class="d-flex gap-3">
+
+                    <a href="#">
+                        <i class="bi bi-facebook"></i>
+                    </a>
+
+                    <a href="#">
+                        <i class="bi bi-instagram"></i>
+                    </a>
+
+                    <a href="#">
+                        <i class="bi bi-twitter-x"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- Bootstrap JS -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    ></script>
+
+</body>
+</html>

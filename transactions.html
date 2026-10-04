@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Transactions | IDIZA</title>
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Bootstrap Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+    <!-- Google Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- IDIZA CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <style>
+        body {
+            background: #f6f8fb;
+        }
+
+        .transactions-page {
+            padding: 55px 0 80px;
+        }
+
+        .page-header {
+            margin-bottom: 30px;
+        }
+
+        .page-header h1 {
+            color: #081b33;
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .page-header p {
+            color: #667085;
+            margin: 0;
+        }
+
+        .transactions-card {
+            background: #ffffff;
+            border: 1px solid #e4e8ef;
+            border-radius: 18px;
+            box-shadow: 0 8px 30px rgba(8, 27, 51, 0.05);
+            overflow: hidden;
+        }
+
+        .transaction-toolbar {
+            padding: 22px;
+            border-bottom: 1px solid #e4e8ef;
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #98a2b3;
+        }
+
+        .search-box input {
+            min-height: 46px;
+            padding-left: 42px;
+            border: 1px solid #d9dee7;
+            border-radius: 10px;
+        }
+
+        .search-box input:focus {
+            border-color: #1677ff;
+            box-shadow: 0 0 0 4px rgba(22, 119, 255, 0.10);
+        }
+
+        .filter-select {
+            min-height: 46px;
+            border: 1px solid #d9dee7;
+            border-radius: 10px;
+        }
+
+        .filter-select:focus {
+            border-color: #1677ff;
+            box-shadow: 0 0 0 4px rgba(22, 119, 255, 0.10);
+        }
+
+        /* Table */
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        .transaction-table {
+            margin: 0;
+            min-width: 850px;
+        }
+
+        .transaction-table thead th {
+            background: #f9fafb;
+            color: #667085;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            padding: 16px 20px;
+            border-bottom: 1px solid #e4e8ef;
+            white-space: nowrap;
+        }
+
+        .transaction-table tbody td {
+            padding: 18px 20px;
+            vertical-align: middle;
+            border-bottom: 1px solid #edf0f4;
+            color: #172033;
+            font-size: 14px;
+        }
+
+        .transaction-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .transaction-table tbody tr:hover {
+            background: #fafcff;
+        }
+
+        .transaction-id {
+            font-size: 12px;
+            color: #667085;
+            font-family: monospace;
+        }
+
+        .network-cell {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .network-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 9px;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        .network-icon.mtn {
+            background: #ffcc00;
+            color: #111;
+        }
+
+        .network-icon.airtel {
+            background: #e31837;
+            color: white;
+        }
+
+        .network-icon.glo {
+            background: #008a3d;
+            color: white;
+        }
+
+        .network-icon.nine-mobile {
+            background: #008f8f;
+            color: white;
+        }
+
+        .network-info strong {
+            display: block;
+            font-size: 14px;
+            color: #172033;
+        }
+
+        .network-info span {
+            font-size: 12px;
+            color: #667085;
+        }
+
+        .phone-number {
+            font-weight: 600;
+        }
+
+        .amount {
+            font-weight: 700;
+        }
+
+        /* Status */
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 6px 10px;
+            border-radius: 30px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .status-success {
+            color: #087443;
+            background: #e9f8f1;
+        }
+
+        .status-pending {
+            color: #946200;
+            background: #fff5d8;
+        }
+
+        .status-failed {
+            color: #b42318;
+            background: #fff0ef;
+        }
+
+        .view-btn {
+            width: 36px;
+            height: 36px;
+            border: 1px solid #e0e5ec;
+            border-radius: 9px;
+            background: white;
+            color: #667085;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .view-btn:hover {
+            color: #1677ff;
+            border-color: #1677ff;
+            background: #f0f6ff;
+        }
+
+        /* Empty State */
+
+        .no-results {
+            display: none;
+            padding: 55px 20px;
+            text-align: center;
+        }
+
+        .no-results-icon {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            background: #f0f6ff;
+            color: #1677ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 27px;
+        }
+
+        .no-results h4 {
+            color: #172033;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .no-results p {
+            color: #667085;
+            font-size: 14px;
+            margin-bottom: 0;
+        }
+
+        /* Pagination */
+
+        .pagination-area {
+            padding: 18px 22px;
+            border-top: 1px solid #e4e8ef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .pagination-info {
+            color: #667085;
+            font-size: 13px;
+        }
+
+        .page-btn {
+            width: 38px;
+            height: 38px;
+            border: 1px solid #dfe4eb;
+            background: white;
+            border-radius: 8px;
+            color: #667085;
+        }
+
+        .page-btn.active {
+            background: #1677ff;
+            border-color: #1677ff;
+            color: white;
+        }
+
+        .page-btn:hover {
+            border-color: #1677ff;
+            color: #1677ff;
+        }
+
+        .page-btn.active:hover {
+            color: white;
+        }
+
+        @media (max-width: 767px) {
+
+            .transactions-page {
+                padding: 35px 0 60px;
+            }
+
+            .page-header h1 {
+                font-size: 27px;
+            }
+
+            .transaction-toolbar {
+                padding: 16px;
+            }
+
+            .pagination-area {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg bg-white border-bottom sticky-top">
+
+    <div class="container">
+
+        <a class="navbar-brand fw-bold" href="index.html">
+            <span style="color:#081b33;">IDI</span><span style="color:#1677ff;">ZA</span>
+        </a>
+
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#mainNavbar"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainNavbar">
+
+            <ul class="navbar-nav me-auto ms-lg-4">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="dashboard.html">
+                        Dashboard
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="buy-data.html">
+                        Buy Data
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="data-plans.html">
+                        Data Plans
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="transactions.html">
+                        Transactions
+                    </a>
+                </li>
+
+            </ul>
+
+
+            <!-- Profile -->
+            <div class="dropdown">
+
+                <button
+                    class="btn btn-light rounded-pill px-3 dropdown-toggle"
+                    data-bs-toggle="dropdown"
+                >
+
+                    <span
+                        class="d-inline-flex align-items-center justify-content-center rounded-circle me-2"
+                        style="
+                            width:32px;
+                            height:32px;
+                            background:#eaf2ff;
+                            color:#1677ff;
+                            font-weight:700;
+                        "
+                    >
+                        IA
+                    </span>
+
+                    Idris
+
+                </button>
+
+                <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0">
+
+                    <li>
+                        <a class="dropdown-item" href="profile.html">
+                            <i class="bi bi-person me-2"></i>
+                            My Profile
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item" href="notifications.html">
+                            <i class="bi bi-bell me-2"></i>
+                            Notifications
+                        </a>
+                    </li>
+
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item text-danger" href="login.html">
+                            <i class="bi bi-box-arrow-right me-2"></i>
+                            Logout
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<!-- Main -->
+<main class="transactions-page">
+
+    <div class="container">
+
+        <!-- Header -->
+        <div class="page-header">
+
+            <h1>
+                Transactions
+            </h1>
+
+            <p>
+                View and manage your data purchase history.
+            </p>
+
+        </div>
+
+
+        <!-- Transaction Card -->
+        <div class="transactions-card">
+
+            <!-- Toolbar -->
+            <div class="transaction-toolbar">
+
+                <div class="row g-3 align-items-center">
+
+                    <div class="col-lg-7">
+
+                        <div class="search-box">
+
+                            <i class="bi bi-search"></i>
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="searchTransaction"
+                                placeholder="Search transaction, phone number or network..."
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-sm-6 col-lg-3">
+
+                        <select
+                            class="form-select filter-select"
+                            id="statusFilter"
+                        >
+
+                            <option value="all">
+                                All Status
+                            </option>
+
+                            <option value="successful">
+                                Successful
+                            </option>
+
+                            <option value="pending">
+                                Pending
+                            </option>
+
+                            <option value="failed">
+                                Failed
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="col-sm-6 col-lg-2">
+
+                        <select
+                            class="form-select filter-select"
+                            id="networkFilter"
+                        >
+
+                            <option value="all">
+                                All Networks
+                            </option>
+
+                            <option value="MTN">
+                                MTN
+                            </option>
+
+                            <option value="Airtel">
+                                Airtel
+                            </option>
+
+                            <option value="Glo">
+                                Glo
+                            </option>
+
+                            <option value="9mobile">
+                                9mobile
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Table -->
+            <div class="table-wrapper">
+
+                <table class="table transaction-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Transaction
+                            </th>
+
+                            <th>
+                                Network
+                            </th>
+
+                            <th>
+                                Phone Number
+                            </th>
+
+                            <th>
+                                Amount
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Date
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="transactionTableBody">
+
+                        <!-- Transaction 1 -->
+                        <tr
+                            class="transaction-row"
+                            data-network="MTN"
+                            data-status="successful"
+                        >
+
+                            <td>
+                                <span class="transaction-id">
+                                    IDZ-20260928-001
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <div class="network-cell">
+
+                                    <div class="network-icon mtn">
+                                        MTN
+                                    </div>
+
+                                    <div class="network-info">
+
+                                        <strong>
+                                            MTN
+                                        </strong>
+
+                                        <span>
+                                            2GB Data
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+                                <span class="phone-number">
+                                    08012345678
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="amount">
+                                    ₦900
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <span class="status-badge status-success">
+                                    <i class="bi bi-check-circle-fill"></i>
+                                    Successful
+                                </span>
+
+                            </td>
+
+                            <td>
+                                Sep 28, 2026
+                            </td>
+
+                            <td>
+
+                                <a
+                                    href="transaction-details.html?id=IDZ-20260928-001"
+                                    class="view-btn"
+                                    title="View transaction"
+                                >
+                                    <i class="bi bi-eye"></i>
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+
+                        <!-- Transaction 2 -->
+                        <tr
+                            class="transaction-row"
+                            data-network="Airtel"
+                            data-status="successful"
+                        >
+
+                            <td>
+                                <span class="transaction-id">
+                                    IDZ-20260925-002
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <div class="network-cell">
+
+                                    <div class="network-icon airtel">
+                                        AIRTEL
+                                    </div>
+
+                                    <div class="network-info">
+
+                                        <strong>
+                                            Airtel
+                                        </strong>
+
+                                        <span>
+                                            1GB Data
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+                                <span class="phone-number">
+                                    08123456789
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="amount">
+                                    ₦500
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <span class="status-badge status-success">
+                                    <i class="bi bi-check-circle-fill"></i>
+                                    Successful
+                                </span>
+
+                            </td>
+
+                            <td>
+                                Sep 25, 2026
+                            </td>
+
+                            <td>
+
+                                <a
+                                    href="transaction-details.html?id=IDZ-20260925-002"
+                                    class="view-btn"
+                                >
+                                    <i class="bi bi-eye"></i>
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+
+                        <!-- Transaction 3 -->
+                        <tr
+                            class="transaction-row"
+                            data-network="Glo"
+                            data-status="pending"
+                        >
+
+                            <td>
+                                <span class="transaction-id">
+                                    IDZ-20260922-003
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <div class="network-cell">
+
+                                    <div class="network-icon glo">
+                                        GLO
+                                    </div>
+
+                                    <div class="network-info">
+
+                                        <strong>
+                                            Glo
+                                        </strong>
+
+                                        <span>
+                                            5GB Data
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+                                <span class="phone-number">
+                                    07098765432
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="amount">
+                                    ₦2,000
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <span class="status-badge status-pending">
+                                    <i class="bi bi-clock-fill"></i>
+                                    Pending
+                                </span>
+
+                            </td>
+
+                            <td>
+                                Sep 22, 2026
+                            </td>
+
+                            <td>
+
+                                <a
+                                    href="transaction-details.html?id=IDZ-20260922-003"
+                                    class="view-btn"
+                                >
+                                    <i class="bi bi-eye"></i>
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+
+                        <!-- Transaction 4 -->
+                        <tr
+                            class="transaction-row"
+                            data-network="9mobile"
+                            data-status="successful"
+                        >
+
+                            <td>
+                                <span class="transaction-id">
+                                    IDZ-20260920-004
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <div class="network-cell">
+
+                                    <div class="network-icon nine-mobile">
+                                        9MOBILE
+                                    </div>
+
+                                    <div class="network-info">
+
+                                        <strong>
+                                            9mobile
+                                        </strong>
+
+                                        <span>
+                                            2GB Data
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+                                <span class="phone-number">
+                                    09011223344
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="amount">
+                                    ₦900
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <span class="status-badge status-success">
+                                    <i class="bi bi-check-circle-fill"></i>
+                                    Successful
+                                </span>
+
+                            </td>
+
+                            <td>
+                                Sep 20, 2026
+                            </td>
+
+                            <td>
+
+                                <a
+                                    href="transaction-details.html?id=IDZ-20260920-004"
+                                    class="view-btn"
+                                >
+                                    <i class="bi bi-eye"></i>
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+
+                        <!-- Transaction 5 -->
+                        <tr
+                            class="transaction-row"
+                            data-network="MTN"
+                            data-status="failed"
+                        >
+
+                            <td>
+                                <span class="transaction-id">
+                                    IDZ-20260917-005
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <div class="network-cell">
+
+                                    <div class="network-icon mtn">
+                                        MTN
+                                    </div>
+
+                                    <div class="network-info">
+
+                                        <strong>
+                                            MTN
+                                        </strong>
+
+                                        <span>
+                                            5GB Data
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+                                <span class="phone-number">
+                                    08055667788
+                                </span>
+                            </td>
+
+                            <td>
+                                <span class="amount">
+                                    ₦2,000
+                                </span>
+                            </td>
+
+                            <td>
+
+                                <span class="status-badge status-failed">
+                                    <i class="bi bi-x-circle-fill"></i>
+                                    Failed
+                                </span>
+
+                            </td>
+
+                            <td>
+                                Sep 17, 2026
+                            </td>
+
+                            <td>
+
+                                <a
+                                    href="transaction-details.html?id=IDZ-20260917-005"
+                                    class="view-btn"
+                                >
+                                    <i class="bi bi-eye"></i>
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+
+                <!-- No Results -->
+                <div
+                    class="no-results"
+                    id="noResults"
+                >
+
+                    <div class="no-results-icon">
+                        <i class="bi bi-search"></i>
+                    </div>
+
+                    <h4>
+                        No transactions found
+                    </h4>
+
+                    <p>
+                        Try changing your search or filter.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Pagination -->
+            <div class="pagination-area">
+
+                <div class="pagination-info">
+                    Showing <strong id="visibleCount">5</strong> transactions
+                </div>
+
+                <div class="d-flex gap-2">
+
+                    <button
+                        class="page-btn"
+                        type="button"
+                        disabled
+                    >
+                        <i class="bi bi-chevron-left"></i>
+                    </button>
+
+                    <button
+                        class="page-btn active"
+                        type="button"
+                    >
+                        1
+                    </button>
+
+                    <button
+                        class="page-btn"
+                        type="button"
+                    >
+                        2
+                    </button>
+
+                    <button
+                        class="page-btn"
+                        type="button"
+                    >
+                        3
+                    </button>
+
+                    <button
+                        class="page-btn"
+                        type="button"
+                    >
+                        <i class="bi bi-chevron-right"></i>
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<!-- Footer -->
+<footer class="border-top bg-white py-4">
+
+    <div class="container">
+
+        <div class="row align-items-center">
+
+            <div class="col-md-6">
+
+                <div class="fw-bold fs-5">
+                    <span style="color:#081b33;">IDI</span><span style="color:#1677ff;">ZA</span>
+                </div>
+
+                <small class="text-muted">
+                    Simple, fast and reliable mobile data.
+                </small>
+
+            </div>
+
+            <div class="col-md-6 text-md-end mt-3 mt-md-0">
+
+                <small class="text-muted">
+                    © 2026 IDIZA. All rights reserved.
+                </small>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- Bootstrap JS -->
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+></script>
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const searchInput =
+        document.getElementById("searchTransaction");
+
+    const statusFilter =
+        document.getElementById("statusFilter");
+
+    const networkFilter =
+        document.getElementById("networkFilter");
+
+    const rows =
+        document.querySelectorAll(".transaction-row");
+
+    const noResults =
+        document.getElementById("noResults");
+
+    const visibleCount =
+        document.getElementById("visibleCount");
+
+
+    function filterTransactions() {
+
+        const search =
+            searchInput.value.toLowerCase().trim();
+
+        const status =
+            statusFilter.value.toLowerCase();
+
+        const network =
+            networkFilter.value.toLowerCase();
+
+        let count = 0;
+
+
+        rows.forEach(row => {
+
+            const rowText =
+                row.textContent.toLowerCase();
+
+            const rowStatus =
+                row.dataset.status.toLowerCase();
+
+            const rowNetwork =
+                row.dataset.network.toLowerCase();
+
+
+            const matchesSearch =
+                rowText.includes(search);
+
+            const matchesStatus =
+                status === "all" ||
+                rowStatus === status;
+
+            const matchesNetwork =
+                network === "all" ||
+                rowNetwork === network;
+
+
+            if (
+                matchesSearch &&
+                matchesStatus &&
+                matchesNetwork
+            ) {
+
+                row.style.display = "";
+
+                count++;
+
+            } else {
+
+                row.style.display = "none";
+
+            }
+
+        });
+
+
+        visibleCount.textContent = count;
+
+        if (count === 0) {
+
+            noResults.style.display = "block";
+
+        } else {
+
+            noResults.style.display = "none";
+
+        }
+
+    }
+
+
+    searchInput.addEventListener(
+        "input",
+        filterTransactions
+    );
+
+    statusFilter.addEventListener(
+        "change",
+        filterTransactions
+    );
+
+    networkFilter.addEventListener(
+        "change",
+        filterTransactions
+    );
+
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Users | IDIZA Admin</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+        rel="stylesheet">
+
+    <!-- IDIZA CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <style>
+
+        body {
+            background: #f6f8fb;
+            font-family: 'Inter', sans-serif;
+            color: #172033;
+        }
+
+        /* =========================
+           SIDEBAR
+        ========================= */
+
+        .admin-sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            height: 100vh;
+            background: #081b33;
+            padding: 25px 15px;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .admin-logo {
+            display: block;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 25px;
+            font-weight: 800;
+            padding: 0 15px 30px;
+        }
+
+        .admin-logo span {
+            color: #1677ff;
+        }
+
+        .admin-label {
+            color: rgba(255,255,255,0.4);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 0 15px;
+            margin-bottom: 10px;
+        }
+
+        .admin-nav {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .admin-nav li {
+            margin-bottom: 5px;
+        }
+
+        .admin-nav a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: rgba(255,255,255,0.65);
+            text-decoration: none;
+            padding: 12px 15px;
+            border-radius: 9px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+
+        .admin-nav a:hover,
+        .admin-nav a.active {
+            color: #ffffff;
+            background: rgba(22,119,255,0.18);
+        }
+
+        .admin-nav i {
+            font-size: 18px;
+        }
+
+        .sidebar-divider {
+            border-color: rgba(255,255,255,0.08);
+            margin: 20px 15px;
+        }
+
+        .sidebar-user {
+            position: absolute;
+            bottom: 20px;
+            left: 15px;
+            right: 15px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            padding: 18px 5px 0;
+        }
+
+        .admin-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #1677ff;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .sidebar-user-name {
+            color: #ffffff;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .sidebar-user-role {
+            color: rgba(255,255,255,0.45);
+            font-size: 11px;
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .admin-main {
+            margin-left: 250px;
+            min-height: 100vh;
+        }
+
+        /* =========================
+           TOPBAR
+        ========================= */
+
+        .admin-topbar {
+            background: #ffffff;
+            border-bottom: 1px solid #e4e8ef;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+        }
+
+        .admin-page-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .admin-topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .topbar-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #667085;
+            text-decoration: none;
+            position: relative;
+        }
+
+        .topbar-icon:hover {
+            background: #f2f4f7;
+            color: #1677ff;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: 4px;
+            right: 3px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ef4444;
+            border: 2px solid #ffffff;
+        }
+
+        /* =========================
+           CONTENT
+        ========================= */
+
+        .admin-content {
+            padding: 30px;
+        }
+
+        .page-heading {
+            margin-bottom: 25px;
+        }
+
+        .page-heading h1 {
+            font-size: 27px;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+
+        .page-heading p {
+            color: #667085;
+            font-size: 14px;
+            margin: 0;
+        }
+
+        /* =========================
+           STATS
+        ========================= */
+
+        .mini-stat {
+            background: #ffffff;
+            border: 1px solid #e4e8ef;
+            border-radius: 12px;
+            padding: 18px;
+            height: 100%;
+        }
+
+        .mini-stat-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+            font-size: 18px;
+        }
+
+        .blue {
+            background: #eaf2ff;
+            color: #1677ff;
+        }
+
+        .green {
+            background: #e8f8f1;
+            color: #16a36a;
+        }
+
+        .orange {
+            background: #fff5df;
+            color: #d98b00;
+        }
+
+        .red {
+            background: #feecec;
+            color: #d14343;
+        }
+
+        .mini-stat-number {
+            font-size: 23px;
+            font-weight: 800;
+        }
+
+        .mini-stat-label {
+            font-size: 12px;
+            color: #667085;
+            margin-top: 3px;
+        }
+
+        /* =========================
+           MAIN CARD
+        ========================= */
+
+        .admin-card {
+            background: #ffffff;
+            border: 1px solid #e4e8ef;
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .admin-card-header {
+            padding: 18px 20px;
+            border-bottom: 1px solid #e4e8ef;
+        }
+
+        /* =========================
+           FILTERS
+        ========================= */
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 13px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #98a2b3;
+        }
+
+        .search-box input {
+            padding-left: 38px;
+            border-color: #e4e8ef;
+            border-radius: 8px;
+            height: 42px;
+            font-size: 13px;
+        }
+
+        .search-box input:focus {
+            border-color: #1677ff;
+            box-shadow: 0 0 0 3px rgba(22,119,255,0.08);
+        }
+
+        .filter-select {
+            height: 42px;
+            border-color: #e4e8ef;
+            border-radius: 8px;
+            font-size: 13px;
+        }
+
+        .filter-select:focus {
+            border-color: #1677ff;
+            box-shadow: 0 0 0 3px rgba(22,119,255,0.08);
+        }
+
+        /* =========================
+           TABLE
+        ========================= */
+
+        .table {
+            margin-bottom: 0;
+        }
+
+        .table th {
+            background: #fafbfd;
+            color: #667085;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            font-weight: 700;
+            padding: 14px 20px;
+            border-bottom: 1px solid #e4e8ef;
+            white-space: nowrap;
+        }
+
+        .table td {
+            padding: 15px 20px;
+            font-size: 13px;
+            vertical-align: middle;
+            border-bottom: 1px solid #eef1f5;
+        }
+
+        .table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .table tbody tr:hover {
+            background: #fafbfd;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+        }
+
+        .user-avatar {
+            width: 38px;
+            height: 38px;
+            min-width: 38px;
+            border-radius: 50%;
+            background: #eaf2ff;
+            color: #1677ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .user-name {
+            font-weight: 600;
+            color: #172033;
+        }
+
+        .user-email {
+            font-size: 11px;
+            color: #98a2b3;
+            margin-top: 2px;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 9px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .status-active {
+            background: #e8f8f1;
+            color: #138a59;
+        }
+
+        .status-inactive {
+            background: #f2f4f7;
+            color: #667085;
+        }
+
+        .status-suspended {
+            background: #feecec;
+            color: #d14343;
+        }
+
+        .action-btn {
+            width: 34px;
+            height: 34px;
+            border: 1px solid #e4e8ef;
+            border-radius: 7px;
+            background: #ffffff;
+            color: #667085;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .action-btn:hover {
+            color: #1677ff;
+            border-color: #1677ff;
+            background: #f8fbff;
+        }
+
+        /* =========================
+           PAGINATION
+        ========================= */
+
+        .pagination-area {
+            padding: 18px 20px;
+            border-top: 1px solid #e4e8ef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .pagination-info {
+            font-size: 12px;
+            color: #667085;
+        }
+
+        .page-btn {
+            width: 34px;
+            height: 34px;
+            border: 1px solid #e4e8ef;
+            background: #ffffff;
+            border-radius: 7px;
+            color: #667085;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .page-btn.active {
+            background: #1677ff;
+            color: #ffffff;
+            border-color: #1677ff;
+        }
+
+        .page-btn:hover:not(.active) {
+            border-color: #1677ff;
+            color: #1677ff;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        .mobile-menu-btn {
+            display: none;
+            border: none;
+            background: transparent;
+            color: #172033;
+            font-size: 23px;
+        }
+
+        .sidebar-overlay {
+            display: none;
+        }
+
+        @media (max-width: 991px) {
+
+            .admin-sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.25s ease;
+            }
+
+            .admin-sidebar.show {
+                transform: translateX(0);
+            }
+
+            .admin-main {
+                margin-left: 0;
+            }
+
+            .mobile-menu-btn {
+                display: inline-block;
+            }
+
+            .sidebar-overlay.show {
+                display: block;
+                position: fixed;
+                inset: 0;
+                background: rgba(0,0,0,0.4);
+                z-index: 999;
+            }
+
+            .admin-content {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+
+            .admin-topbar {
+                padding: 0 15px;
+            }
+
+            .admin-content {
+                padding: 15px;
+            }
+
+            .admin-page-title {
+                font-size: 17px;
+            }
+
+            .page-heading h1 {
+                font-size: 23px;
+            }
+
+            .pagination-area {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+
+<!-- =========================
+     SIDEBAR
+========================= -->
+
+<aside class="admin-sidebar" id="adminSidebar">
+
+    <a href="index.html" class="admin-logo">
+        IDI<span>ZA</span>
+    </a>
+
+    <div class="admin-label">
+        Main Menu
+    </div>
+
+    <ul class="admin-nav">
+
+        <li>
+            <a href="index.html">
+                <i class="bi bi-grid-1x2"></i>
+                Dashboard
+            </a>
+        </li>
+
+        <li>
+            <a href="users.html" class="active">
+                <i class="bi bi-people"></i>
+                Users
+            </a>
+        </li>
+
+        <li>
+            <a href="data-plans.html">
+                <i class="bi bi-phone"></i>
+                Data Plans
+            </a>
+        </li>
+
+        <li>
+            <a href="transactions.html">
+                <i class="bi bi-receipt"></i>
+                Transactions
+            </a>
+        </li>
+
+    </ul>
+
+    <hr class="sidebar-divider">
+
+    <div class="admin-label">
+        System
+    </div>
+
+    <ul class="admin-nav">
+
+        <li>
+            <a href="settings.html">
+                <i class="bi bi-gear"></i>
+                Settings
+            </a>
+        </li>
+
+        <li>
+            <a href="../index.html">
+                <i class="bi bi-globe2"></i>
+                View Website
+            </a>
+        </li>
+
+        <li>
+            <a href="../login.html">
+                <i class="bi bi-box-arrow-right"></i>
+                Logout
+            </a>
+        </li>
+
+    </ul>
+
+    <div class="sidebar-user">
+
+        <div class="d-flex align-items-center gap-2">
+
+            <div class="admin-avatar">
+                IA
+            </div>
+
+            <div>
+
+                <div class="sidebar-user-name">
+                    Idris Ahmad
+                </div>
+
+                <div class="sidebar-user-role">
+                    Administrator
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</aside>
+
+
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main class="admin-main">
+
+
+    <!-- TOPBAR -->
+
+    <header class="admin-topbar">
+
+        <div class="d-flex align-items-center gap-3">
+
+            <button
+                class="mobile-menu-btn"
+                id="mobileMenuBtn">
+
+                <i class="bi bi-list"></i>
+
+            </button>
+
+            <h1 class="admin-page-title">
+                Users
+            </h1>
+
+        </div>
+
+
+        <div class="admin-topbar-right">
+
+            <a
+                href="../notifications.html"
+                class="topbar-icon"
+                title="Notifications">
+
+                <i class="bi bi-bell fs-5"></i>
+
+                <span class="notification-badge"></span>
+
+            </a>
+
+
+            <div class="dropdown">
+
+                <a
+                    href="#"
+                    data-bs-toggle="dropdown"
+                    class="text-decoration-none">
+
+                    <div class="admin-avatar">
+                        IA
+                    </div>
+
+                </a>
+
+                <ul class="dropdown-menu dropdown-menu-end shadow border-0">
+
+                    <li>
+                        <a
+                            href="settings.html"
+                            class="dropdown-item">
+
+                            <i class="bi bi-gear me-2"></i>
+                            Settings
+
+                        </a>
+                    </li>
+
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li>
+                        <a
+                            href="../login.html"
+                            class="dropdown-item text-danger">
+
+                            <i class="bi bi-box-arrow-right me-2"></i>
+                            Logout
+
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- CONTENT -->
+
+    <div class="admin-content">
+
+
+        <!-- PAGE HEADING -->
+
+        <div class="page-heading">
+
+            <h1>
+                Manage Users
+            </h1>
+
+            <p>
+                View, search and manage all IDIZA customer accounts.
+            </p>
+
+        </div>
+
+
+        <!-- =========================
+             USER STATISTICS
+        ========================= -->
+
+        <div class="row g-3 mb-4">
+
+            <div class="col-6 col-lg-3">
+
+                <div class="mini-stat">
+
+                    <div class="mini-stat-icon blue">
+                        <i class="bi bi-people"></i>
+                    </div>
+
+                    <div class="mini-stat-number">
+                        1,284
+                    </div>
+
+                    <div class="mini-stat-label">
+                        Total Users
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-6 col-lg-3">
+
+                <div class="mini-stat">
+
+                    <div class="mini-stat-icon green">
+                        <i class="bi bi-person-check"></i>
+                    </div>
+
+                    <div class="mini-stat-number">
+                        1,156
+                    </div>
+
+                    <div class="mini-stat-label">
+                        Active Users
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-6 col-lg-3">
+
+                <div class="mini-stat">
+
+                    <div class="mini-stat-icon orange">
+                        <i class="bi bi-person-dash"></i>
+                    </div>
+
+                    <div class="mini-stat-number">
+                        103
+                    </div>
+
+                    <div class="mini-stat-label">
+                        Inactive Users
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-6 col-lg-3">
+
+                <div class="mini-stat">
+
+                    <div class="mini-stat-icon red">
+                        <i class="bi bi-person-x"></i>
+                    </div>
+
+                    <div class="mini-stat-number">
+                        25
+                    </div>
+
+                    <div class="mini-stat-label">
+                        Suspended Users
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             USERS TABLE
+        ========================= -->
+
+        <div class="admin-card">
+
+
+            <!-- CARD HEADER -->
+
+            <div class="admin-card-header">
+
+                <div class="row g-3 align-items-center">
+
+                    <div class="col-lg-6">
+
+                        <div class="search-box">
+
+                            <i class="bi bi-search"></i>
+
+                            <input
+                                type="text"
+                                id="userSearch"
+                                class="form-control"
+                                placeholder="Search by name, email or phone...">
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-sm-6 col-lg-3">
+
+                        <select
+                            id="statusFilter"
+                            class="form-select filter-select">
+
+                            <option value="all">
+                                All Statuses
+                            </option>
+
+                            <option value="active">
+                                Active
+                            </option>
+
+                            <option value="inactive">
+                                Inactive
+                            </option>
+
+                            <option value="suspended">
+                                Suspended
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="col-sm-6 col-lg-3">
+
+                        <select
+                            id="sortFilter"
+                            class="form-select filter-select">
+
+                            <option value="newest">
+                                Newest First
+                            </option>
+
+                            <option value="oldest">
+                                Oldest First
+                            </option>
+
+                            <option value="name">
+                                Name A-Z
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- TABLE -->
+
+            <div class="table-responsive">
+
+                <table class="table" id="usersTable">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                User
+                            </th>
+
+                            <th>
+                                Phone
+                            </th>
+
+                            <th>
+                                Account ID
+                            </th>
+
+                            <th>
+                                Joined
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th class="text-end">
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+
+                        <!-- USER 1 -->
+
+                        <tr
+                            data-status="active"
+                            data-name="Idris Ahmad"
+                            data-email="idris@example.com"
+                            data-phone="08012345678">
+
+                            <td>
+
+                                <div class="user-info">
+
+                                    <div class="user-avatar">
+                                        IA
+                                    </div>
+
+                                    <div>
+
+                                        <div class="user-name">
+                                            Idris Ahmad
+                                        </div>
+
+                                        <div class="user-email">
+                                            idris@example.com
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+                                08012345678
+                            </td>
+
+                            <td>
+                                IDZ-000001
+                            </td>
+
+                            <td>
+                                Sep 15, 2026
+                            </td>
+
+                            <td>
+
+                                <span class="status-badge status-active">
+                                    <i class="bi bi-check-circle"></i>
+                                    Active
+                                </span>
+
+                            </td>
+
+                            <td class="text-end">
+
+                                <a
+                                    href="user-details.html?id=IDZ-000001"
+                                    class="action-btn"
+                                    title="View User">
+
+                                    <i class="bi bi-eye"></i>
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+
+                        <!-- USER 2 -->
+
+                        <tr
+                            data-status="active"
+                            data-name="Ahmed O."
+                            data-email="ahmed@example.com"
+                            data-phone="08123456789">
+
+                            <td>
+
+                                <div class="user-info">
+
+                                    <div class="user-avatar">
+                                        AO
+                                    </div>
+
+                                    <div>
+
+                                        <div class="user-name">
+                                            Ahmed O.
+                                        </div>
+
+                                        <div class="user-email">
+                                            ahmed@example.com
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+                                08123456789
+                            </td>
+
+                            <td>
+                                IDZ-000002
+                            </td>
+
+                            <td>
+                                Sep 14, 2026
+                            </td>
+
+                            <td>
+
+                                <span class="status-badge status-active">
+                                    <i class="bi bi-check-circle"></i>
+                                    Active
+                                </span>
+
+                            </td>
+
+                            <td class="text-end">
+
+                                <a
+                                    href="user-details.html?id=IDZ-000002"
+                                    class="action-btn"
+                                    title="View User">
+
+                                    <i class="bi bi-eye"></i>
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+
+                        <!-- USER 3 -->
+
+                        <tr
+                            data-status="active"
+                            data-name="Sarah Ali"
+                            data-email="sarah@example.com"
+                            data-phone="07098765432">
+
+                            <td>
+
+                                <div class="user-info">
+
+                                    <div class="user-avatar">
+                                        SA
+                                    </div>
+
+                                    <div>
+
+                                        <div class="user-name">
+                                            Sarah Ali
+                                        </div>
+
+                                        <div class="user-email">
+                                            sarah@example.com
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+                                07098765432
+                            </td>
+
+                            <td>
+                                IDZ-000003
+                            </td>
+
+                            <td>
+                                Sep 12, 2026
+                            </td>
+
+                            <td>
+
+                                <span class="status-badge status-active">
+                                    <i class="bi bi-check-circle"></i>
+                                    Active
+                                </span>
+
+                            </td>
+
+                            <td class="text-end">
+
+                                <a
+                                    href="user-details.html?id=IDZ-000003"
+                                    class="action-btn"
+                                    title="View User">
+
+                                    <i class="bi bi-eye"></i>
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+
+                        <!-- USER 4 -->
+
+                        <tr
+                            data-status="inactive"
+                            data-name="Yusuf Mohammed"
+                            data-email="yusuf@example.com"
+                            data-phone="09011223344">
+
+                            <td>
+
+                                <div class="user-info">
+
+                                    <div class="user-avatar">
+                                        YM
+                                    </div>
+
+                                    <div>
+
+                                        <div class="user-name">
+                                            Yusuf Mohammed
+                                        </div>
+
+                                        <div class="user-email">
+                                            yusuf@example.com
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+                                09011223344
+                            </td>
+
+                            <td>
+                                IDZ-000004
+                            </td>
+
+                            <td>
+                                Sep 10, 2026
+                            </td>
+
+                            <td>
+
+                                <span class="status-badge status-inactive">
+                                    <i class="bi bi-dash-circle"></i>
+                                    Inactive
+                                </span>
+
+                            </td>
+
+                            <td class="text-end">
+
+                                <a
+                                    href="user-details.html?id=IDZ-000004"
+                                    class="action-btn"
+                                    title="View User">
+
+                                    <i class="bi bi-eye"></i>
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+
+                        <!-- USER 5 -->
+
+                        <tr
+                            data-status="suspended"
+                            data-name="Bello Kabiru"
+                            data-email="bello@example.com"
+                            data-phone="08055667788">
+
+                            <td>
+
+                                <div class="user-info">
+
+                                    <div class="user-avatar">
+                                        BK
+                                    </div>
+
+                                    <div>
+
+                                        <div class="user-name">
+                                            Bello Kabiru
+                                        </div>
+
+                                        <div class="user-email">
+                                            bello@example.com
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+                                08055667788
+                            </td>
+
+                            <td>
+                                IDZ-000005
+                            </td>
+
+                            <td>
+                                Sep 08, 2026
+                            </td>
+
+                            <td>
+
+                                <span class="status-badge status-suspended">
+                                    <i class="bi bi-x-circle"></i>
+                                    Suspended
+                                </span>
+
+                            </td>
+
+                            <td class="text-end">
+
+                                <a
+                                    href="user-details.html?id=IDZ-000005"
+                                    class="action-btn"
+                                    title="View User">
+
+                                    <i class="bi bi-eye"></i>
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+
+                        <!-- USER 6 -->
+
+                        <tr
+                            data-status="active"
+                            data-name="Aisha Musa"
+                            data-email="aisha@example.com"
+                            data-phone="08156789012">
+
+                            <td>
+
+                                <div class="user-info">
+
+                                    <div class="user-avatar">
+                                        AM
+                                    </div>
+
+                                    <div>
+
+                                        <div class="user-name">
+                                            Aisha Musa
+                                        </div>
+
+                                        <div class="user-email">
+                                            aisha@example.com
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+                                08156789012
+                            </td>
+
+                            <td>
+                                IDZ-000006
+                            </td>
+
+                            <td>
+                                Sep 05, 2026
+                            </td>
+
+                            <td>
+
+                                <span class="status-badge status-active">
+                                    <i class="bi bi-check-circle"></i>
+                                    Active
+                                </span>
+
+                            </td>
+
+                            <td class="text-end">
+
+                                <a
+                                    href="user-details.html?id=IDZ-000006"
+                                    class="action-btn"
+                                    title="View User">
+
+                                    <i class="bi bi-eye"></i>
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+
+                        <!-- USER 7 -->
+
+                        <tr
+                            data-status="active"
+                            data-name="Musa Ibrahim"
+                            data-email="musa@example.com"
+                            data-phone="07034567890">
+
+                            <td>
+
+                                <div class="user-info">
+
+                                    <div class="user-avatar">
+                                        MI
+                                    </div>
+
+                                    <div>
+
+                                        <div class="user-name">
+                                            Musa Ibrahim
+                                        </div>
+
+                                        <div class="user-email">
+                                            musa@example.com
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+                                07034567890
+                            </td>
+
+                            <td>
+                                IDZ-000007
+                            </td>
+
+                            <td>
+                                Sep 03, 2026
+                            </td>
+
+                            <td>
+
+                                <span class="status-badge status-active">
+                                    <i class="bi bi-check-circle"></i>
+                                    Active
+                                </span>
+
+                            </td>
+
+                            <td class="text-end">
+
+                                <a
+                                    href="user-details.html?id=IDZ-000007"
+                                    class="action-btn"
+                                    title="View User">
+
+                                    <i class="bi bi-eye"></i>
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+
+                        <!-- USER 8 -->
+
+                        <tr
+                            data-status="inactive"
+                            data-name="Fatima Bello"
+                            data-email="fatima@example.com"
+                            data-phone="09087654321">
+
+                            <td>
+
+                                <div class="user-info">
+
+                                    <div class="user-avatar">
+                                        FB
+                                    </div>
+
+                                    <div>
+
+                                        <div class="user-name">
+                                            Fatima Bello
+                                        </div>
+
+                                        <div class="user-email">
+                                            fatima@example.com
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td>
+                                09087654321
+                            </td>
+
+                            <td>
+                                IDZ-000008
+                            </td>
+
+                            <td>
+                                Aug 30, 2026
+                            </td>
+
+                            <td>
+
+                                <span class="status-badge status-inactive">
+                                    <i class="bi bi-dash-circle"></i>
+                                    Inactive
+                                </span>
+
+                            </td>
+
+                            <td class="text-end">
+
+                                <a
+                                    href="user-details.html?id=IDZ-000008"
+                                    class="action-btn"
+                                    title="View User">
+
+                                    <i class="bi bi-eye"></i>
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <!-- PAGINATION -->
+
+            <div class="pagination-area">
+
+                <div class="pagination-info" id="paginationInfo">
+                    Showing 1–8 of 1,284 users
+                </div>
+
+                <div class="d-flex gap-1">
+
+                    <button
+                        class="page-btn"
+                        id="previousBtn">
+
+                        <i class="bi bi-chevron-left"></i>
+
+                    </button>
+
+                    <button class="page-btn active">
+                        1
+                    </button>
+
+                    <button class="page-btn">
+                        2
+                    </button>
+
+                    <button class="page-btn">
+                        3
+                    </button>
+
+                    <button class="page-btn">
+                        4
+                    </button>
+
+                    <button class="page-btn">
+                        5
+                    </button>
+
+                    <button
+                        class="page-btn"
+                        id="nextBtn">
+
+                        <i class="bi bi-chevron-right"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<!-- Bootstrap JS -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const searchInput =
+        document.getElementById("userSearch");
+
+    const statusFilter =
+        document.getElementById("statusFilter");
+
+    const sortFilter =
+        document.getElementById("sortFilter");
+
+    const tableBody =
+        document.querySelector("#usersTable tbody");
+
+    const paginationInfo =
+        document.getElementById("paginationInfo");
+
+    const rows =
+        Array.from(tableBody.querySelectorAll("tr"));
+
+
+    /* =========================
+       FILTER USERS
+    ========================= */
+
+    function filterUsers() {
+
+        const search =
+            searchInput.value
+                .toLowerCase()
+                .trim();
+
+        const status =
+            statusFilter.value;
+
+        let visibleRows = [];
+
+        rows.forEach(function (row) {
+
+            const rowName =
+                row.dataset.name.toLowerCase();
+
+            const rowEmail =
+                row.dataset.email.toLowerCase();
+
+            const rowPhone =
+                row.dataset.phone.toLowerCase();
+
+            const rowStatus =
+                row.dataset.status;
+
+
+            const matchesSearch =
+                rowName.includes(search) ||
+                rowEmail.includes(search) ||
+                rowPhone.includes(search);
+
+            const matchesStatus =
+                status === "all" ||
+                rowStatus === status;
+
+
+            if (
+                matchesSearch &&
+                matchesStatus
+            ) {
+
+                row.style.display = "";
+                visibleRows.push(row);
+
+            } else {
+
+                row.style.display = "none";
+
+            }
+
+        });
+
+
+        if (visibleRows.length === 0) {
+
+            paginationInfo.textContent =
+                "No users found";
+
+        } else {
+
+            paginationInfo.textContent =
+                "Showing " +
+                visibleRows.length +
+                " matching users";
+
+        }
+
+    }
+
+
+    searchInput.addEventListener(
+        "input",
+        filterUsers
+    );
+
+    statusFilter.addEventListener(
+        "change",
+        filterUsers
+    );
+
+
+    /* =========================
+       SORT USERS
+    ========================= */
+
+    sortFilter.addEventListener(
+        "change",
+        function () {
+
+            const value =
+                this.value;
+
+            const sortedRows =
+                [...rows].sort(function (a, b) {
+
+                    if (value === "name") {
+
+                        return a.dataset.name
+                            .localeCompare(
+                                b.dataset.name
+                            );
+
+                    }
+
+                    if (value === "oldest") {
+
+                        return rows.indexOf(b) -
+                               rows.indexOf(a);
+
+                    }
+
+                    return rows.indexOf(a) -
+                           rows.indexOf(b);
+
+                });
+
+
+            sortedRows.forEach(function (row) {
+                tableBody.appendChild(row);
+            });
+
+            filterUsers();
+
+        }
+    );
+
+
+    /* =========================
+       PAGINATION DEMO
+    ========================= */
+
+    document.querySelectorAll(".page-btn")
+        .forEach(function (button) {
+
+            button.addEventListener(
+                "click",
+                function () {
+
+                    if (
+                        this.id === "previousBtn" ||
+                        this.id === "nextBtn"
+                    ) {
+
+                        return;
+
+                    }
+
+                    document
+                        .querySelectorAll(".page-btn")
+                        .forEach(function (btn) {
+                            btn.classList.remove("active");
+                        });
+
+                    this.classList.add("active");
+
+                }
+            );
+
+        });
+
+
+    /* =========================
+       MOBILE SIDEBAR
+    ========================= */
+
+    const menuButton =
+        document.getElementById("mobileMenuBtn");
+
+    const sidebar =
+        document.getElementById("adminSidebar");
+
+    const overlay =
+        document.getElementById("sidebarOverlay");
+
+
+    function openSidebar() {
+
+        sidebar.classList.add("show");
+        overlay.classList.add("show");
+
+    }
+
+
+    function closeSidebar() {
+
+        sidebar.classList.remove("show");
+        overlay.classList.remove("show");
+
+    }
+
+
+    if (menuButton) {
+
+        menuButton.addEventListener(
+            "click",
+            openSidebar
+        );
+
+    }
+
+
+    if (overlay) {
+
+        overlay.addEventListener(
+            "click",
+            closeSidebar
+        );
+
+    }
+
+
+    document.querySelectorAll(
+        ".admin-sidebar a"
+    ).forEach(function (link) {
+
+        link.addEventListener(
+            "click",
+            closeSidebar
+        );
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>
